@@ -1,0 +1,220 @@
+BIBLIOTECA DO COGNITICUS — ORGANIZAÇÃO POR FACULDADES COGNITIVAS
+=================================================================
+
+Fonte-base local: Biblioteca_do_Cogniticus(1).txt
+Fonte externa analisada: https://github.com/free-educa/free-books/tree/master/books
+
+Nota importante:
+A organização abaixo foi feita sobre os livros que aparecem na listagem acessível do repositório no momento da análise.
+O repositório pode mudar com o tempo, e alguns itens podem ter situação autoral/licença incerta.
+Use como catálogo de estudo e priorização, não como garantia jurídica de distribuição.
+
+Princípio:
+Conhecimento → Integração → Faculdade Cognitiva → Habilidade → Competência → Capacidade → Serviço → Transformação da Realidade
+
+00 · Núcleo já recomendado
+--------------------------
+01. Fundamentos de Matemática Elementar — Gelson Iezzi
+02. Precalculus — James Stewart
+03. Introduction to Linear Algebra — Gilbert Strang
+04. Calculus — James Stewart
+05. Calculus — Michael Spivak
+06. Discrete Mathematics and Its Applications — Kenneth Rosen
+07. How to Prove It — Daniel J. Velleman
+08. Code — Charles Petzold
+09. Clean Architecture — Robert C. Martin
+10. Domain-Driven Design — Eric Evans
+11. Python for Data Analysis — Wes McKinney
+12. The Data Warehouse Toolkit — Ralph Kimball
+13. Storytelling with Data — Cole Nussbaumer Knaflic
+
+01 · Matemática, lógica e métodos quantitativos
+-----------------------------------------------
+01. 2-kevin-houston-how-to-think-like-a-mathematician.pdf
+02. Algebra linear.pdf
+03. Calculo - James Stewart - 7 Edição - Volume 2.pdf
+04. Calculo A - Diva Marília Flemming & Mirian Buss Gonçalves - 6ª Edição.pdf
+05. Calculo B - Diva Flemming .pdf
+06. Cálculo I.pdf
+07. Apostila_EngProd_Metodos_Quant.pdf
+
+02 · Computação fundamental, algoritmos e arquitetura
+-----------------------------------------------------
+01. 324976285-Fundamentos-da-programacao-pascal-C-C-java-1-pdf.pdf
+02. Algorithms.pdf
+03. AlgorithmsNotesForProfessionals.pdf
+04. Algoritmos - Teoria e Prática (Thomas H. Cormen, Charles E. Leiserson etc.).pdf
+05. Caderno de Algoritmos.pdf
+06. Apostila de Computação Quântica.pdf
+07. Arquitetura de Computadores - Uma Abordagem Quantitativa.pdf
+
+03 · Programação e linguagens
+-----------------------------
+01. CNotesForProfessionals.pdf
+02. CPlusPlusNotesForProfessionals.pdf
+03. C++ Concurrency in Action.pdf
+04. C++20 for Programmers_ An Objects-Natural Approach.pdf
+05. C# e Orientação a Objetos - Caelum, FN-13.pdf
+06. CSharpNotesForProfessionals.pdf
+07. DotNETFrameworkNotesForProfessionals.pdf
+08. Desbravando Java e Orientação a Objetos Um guia para o iniciante da linguagem - Casa do Codigo.pdf
+09. CDI Integre as dependencias e contextos do seu codigo Java - Casa do Codigo.pdf
+10. Componentes Reutilizaveis em Java Com Reflexoes e Anotacoes - Casa do Codigo.pdf
+11. Diego Martins de Pinho - Javascript - ECMAScript 6 Entre de cabeça no futuro do JavaScript.pdf
+12. Dominando JavaScript Com Jquery - Casa do Codigo.pdf
+
+04 · Web, front-end, mobile e jogos
+-----------------------------------
+01. A Web Mobile - Programe para um Mundo de Muitos Dispositivos - Casa do Codigo.pdf
+02. AndroidNotesForProfessionals.pdf
+03. Angular2NotesForProfessionals.pdf
+04. Aplicacoes Java para a Web Com JDF e JPA - Casa do Codigo.pdf
+05. Aplicacoes web real time com Node-js - Casa do Codigo.pdf
+06. CSS Eficiente.pdf
+07. CSSNotesForProfessionals.pdf
+08. CURSO_WD_43_-_DESENVOLVIMENTO_WEB_COM_HT.pdf
+09. Cody Lindey - Front-End Handbook.pdf
+10. Coletanea Front-End - Uma Antologia da Comunidade Front End Brasileira - Casa do Codigo.pdf
+11. Criando aplicações para o seu Windows Phone.pdf
+12. Desconstruindo a Web - As tecnologias por tras de uma requisicao - Willian Molinari.pdf
+13. Desenvolva jogos com HTML5 Canvas e JavaScript - Casa do Codigo.pdf
+14. Desenvolvimento Web com HTML, CSS e JavaScript - Caelum, Curso WD-43.pdf
+15. Desenvolvimento de Jogos para Android - Explore sua imaginacao com o framework Cocos2D - Casa do Codigo.pdf
+16. Desenvolvimento de Jogos para iOS - Casa do Codigo.pdf
+17. Desenvolvimento web com ASP.NET MVC - Casa do Codigo.pdf
+18. Desenvolvimento web com PHP e MySQL - Casa do Codigo.pdf
+
+05 · Engenharia de software, arquitetura, requisitos e qualidade
+----------------------------------------------------------------
+01. Agile - Desenvolvimento de software com entregas frequentes e foco no valor de negocio - Casa do Codigo.pdf
+02. Agile Software Requirements Lean Requirements Practices for Teams, Programs, and the Enterprise by Dean Leffingwell (z-lib.org).pdf
+03. Arquitetura Limpa - O Guia do Artesão para Estrutura e -- Robert C. Martin -- 2019 -- Alta Books -- 9788550804002 -- 0bc6969ad1129eed85c07a20d25a8e42 -- Anna’s Archive.pdf
+04. Arquitetura Limpa - O Guia do Artesão para Estrutura e Design de Software (Robert C. Martin) (z-lib.org).pdf
+05. Codigo Limpo - Completo PT.pdf
+06. Como ser um Programador Melhor - Pete Goodliffe.pdf
+07. Cucumber e RSpec Construa aplicações Ruby com testes e especificações - Casa do Codigo.pdf
+08. Desenvolvimento Ágil Limpo (Robert C. Martin [Martin, Robert C.]) (z-lib.org).pdf
+09. Design Patterns - Elements of Reusable Object-Oriented Software.pdf
+10. Design Patterns com Java - Projeto orientado a objetos guiado por padrões - Casa do Codigo.pdf
+11. Design_Patterns.pdf
+12. Direto ao ponto - Criando aplicacoes de forma enxuta.pdf
+
+06 · Banco de dados, dados e ciência de dados
+---------------------------------------------
+01. Armazenando dados com Redis - Casa do Codigo.pdf
+02. Data Science do zero_ Primeiras - Joel Grus.pdf
+
+07 · Linux, redes, segurança, DevOps e cloud
+--------------------------------------------
+01. AWS Certified Cloud Practitioner Exam - Autor (Jon Bonso and Adrian Formaran).pdf
+02. AWS Certified DevOps Engineer - Professional Certification and Beyond - Autor (Adam Book).pdf
+03. AWS Certified DevOps Professional Engineer - Autor (Jon Bonso and Kenneth Samonte).pdf
+04. AWS Certified Developer Associate Exam - Autor (Jon Bonso and Adrian Formaran).pdf
+05. AWS Certified Security Specialty Exam - Autor (Jon Bonso and Carlo Acebedo).pdf
+06. AWS Certified Solutions Architect Associate SAA-C03 - Autor (Jon Bonso).pdf
+07. AWS Certified Solutions Architect Professional - Autor (Jon Bonso and Adrian Formaran).pdf
+08. AWS Certified SysOps Administrator Associate Version 2 - Autor (Jon Bonso and Lervin John Obando).pdf
+09. AWS For Beginners - The ultimate guide to the fundamentals of aws - Autor (Steve M Burnett).pdf
+10. AWS for Non-Engineers - Autor (Hiroko Nishimura).pdf
+11. Apostila de Administração de Redes Linux.pdf
+12. Apostila de Linux Ubuntu.pdf
+13. Aurélio Marinho Jargas - Shell Script Profissional.pdf
+14. BashNotesForProfessionals.pdf
+15. Caixa de Ferramentas DevOps Um guia para construcao, administracao e arquitetura de sistemas modernos - Casa do Codigo.pdf
+16. Começando com o Linux - Comandos, serviços e administração - Casa do Codigo.pdf
+17. Comunicação de Dados e Redes de Computadores.pdf
+18. Containers com Docker do Desenvolvimento a Producao.pdf
+19. Controlando versões com Git e GitHub - Casa do Codigo.pdf
+20. Crypto101.pdf
+21. Cyberjutsu.pdf
+22. Desmistificando-a-Computação-em-Nuvem.pdf
+23. DevOps na prática - entrega de software confiável e automatizada - Casa do Codigo.pdf
+24. DevOps nativo de nuvem com Kubernetes (Justin Domingus John Arundel [Domingus etc.) (z-lib.org).pdf
+
+08 · Eletrônica, embarcados, robótica, automação e fabricação
+-------------------------------------------------------------
+01. (Arduino Descomplicado) Claudio Luis Vieira Oliveira_ Humberto Augusto Piovesana Zanetti - Arduino Descomplicado_ Como Elaborar Projetos de Eletrônica-Érica (2015).pdf
+02. (Embedded Technology) Chris Nagy - Embedded Systems Design Using the TI MSP430 Series-Newnes (2003).pdf
+03. (EngineeringPro collection) Dan Harres (Auth.) - Msp430-based Robot Applications. A Guide to Developing Embedded Systems-Newnes (2013).pdf
+04. (Make_ Projects) Massimo Banzi - Getting Started with Arduino -Make (2008).pdf
+05. 07_instrumentacao_basica.pdf
+06. 267380685-fundamentos-de-robotica.pdf
+07. 344639748-Introducao-a-Usinagem-Cnc.pdf
+08. 391779912-Controles-Tipicos-de-equipamentos-e-processos-industriais-pdf.pdf
+09. 495039959-Controle-Essencial-MAYA.pdf
+10. Adrian Fernandez and Dung Dang (Auth.) - Getting Started with the MSP430 Launchpad (2013).pdf
+11. Albert Paul Malvino_ David J. Bates - Eletrônica Volume 2.pdf
+12. Dispositivos_ElEtronicos_E_TEORIA_DE_CIR.pdf
+
+09 · Design, computação gráfica, mídia e produtividade visual
+-------------------------------------------------------------
+01. Apostila de computação gráfica.pdf
+02. Archited - 3D Printing for Your Architectural Modeling.pdf
+03. Computação Gráfica - Teoria e Prática - Eduardo Azevedo e Aura Conci.pdf
+04. Conhecendo o Adobe Photoshop CS6 - Casa do Codigo.pdf
+
+10 · Negócios, startups e produto
+---------------------------------
+01. A Startup Enxuta - Eric Ries.pdf
+02. EBook - eMotion Studios - Como transformar sua ideia em startup em 4 passos (1).pdf
+
+ORDEM SUGERIDA PARA VOCÊ, VINSAN
+--------------------------------
+
+1. Computação Fundamental
+   - Code
+   - Algorithms / CLRS
+   - Arquitetura de Computadores
+   - Sistemas Operacionais e Redes
+
+2. Engenharia de Software
+   - Código Limpo
+   - Arquitetura Limpa
+   - Design Patterns
+   - Agile / Requirements
+   - Testes
+
+3. Dados e Informação
+   - Data Science do Zero
+   - SQL / Banco de Dados
+   - Modelagem de dados
+   - Visualização e relatórios
+
+4. Infraestrutura
+   - Linux
+   - Shell Script
+   - Git/GitHub
+   - Docker
+   - Cloud/AWS
+
+5. Tecnicus futuro
+   - Arduino
+   - Eletrônica
+   - Robótica
+   - Embarcados
+   - CNC
+   - Automação industrial
+
+LEGENDA COGNITICUS
+------------------
+
+Faculdade Computacional:
+livros que ensinam lógica, algoritmos, programação, arquitetura e funcionamento de computadores.
+
+Faculdade Arquitetônica:
+livros que ensinam a projetar sistemas robustos, modulares, testáveis e evolutivos.
+
+Faculdade Analítica:
+livros que ensinam a organizar dados, interpretar padrões e apoiar decisões.
+
+Faculdade Operacional:
+livros que ensinam infraestrutura, Linux, redes, cloud, containers e automação.
+
+Faculdade Tecnicus:
+livros que aproximam computação, eletrônica, robótica, fabricação e automação física.
+
+Faculdade Comunicacional/Visual:
+livros de design, computação gráfica, mídia e representação visual.
+
+Faculdade Empreendedora:
+livros sobre produto, startups, negócio, valor e transformação econômica.

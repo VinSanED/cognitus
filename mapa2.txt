@@ -1,0 +1,147 @@
+minimo vinsan 
+
+  arquetipos 
+    officeBoy 
+      empreer 
+        Fundamentos 
+        MVP 
+        trafego 
+        comercio 
+      dev 
+        fundamentos 
+        ReactJS(NextJS) 
+        java spring(spring boot) 
+        DB 
+          SQL 
+            SQLite 
+            postgresql 
+          NoSQL 
+            IDB 
+            MongoDB 
+        especial 
+          BI 
+          ERP 
+        devOps 
+      trader 
+        fundamentos 
+        aplicação inteligente 
+        controle e gestão de risco 
+      minimal TI curs 
+      CorpEsp 
+        Tayoga 
+        Oratio 
+        Medir 
+        SacroEst 
+          4sapiens.eclesiaticos 
+        FilosEst 
+          MinOlav 
+    Ap Mage CET + filosofo 
+      leituras 
+        sacro 
+        olavo 
+        sertilhanges 
+        capux 
+        adler 
+        vitor 
+        agripa 
+      artigos 
+    construtor 
+
+  projetos 
+    soft 
+      sds 
+      prova real 
+        back end java 
+          precisium 
+          vscommerce 
+        js full 
+          systeIf 
+          precisiumHunted 
+        ... 
+      smart mapper 
+      precisium hunteded 
+      vsp 
+      liber conditions 
+    hard 
+      ferramental... 
+
+  conquistas 
+    area de trabalho 
+      mesa de trabalho 
+      piso 
+      ferramental 
+      armazem 
+    basico 
+      toalet 
+        pintura... 
+        reforço superior 
+          colunas 
+          lage 
+        ... 
+      armazem de residuos 
+      sistema hidrico 
+        armazem 
+          caixa d'agua 350L 
+        transmissores 
+          peças em cano pvc 
+        distribuidores 
+          torneiras 
+        coletor 
+          ProJ N 
+      sistema eletrico 
+        revisar fiação... 
+    dormitorio 
+      pintura... 
+      revisar suportes 
+    escritorio 
+      pintura 
+      organização 
+        revisar posições 
+        revisar funcionalidades 
+
+  renda 
+    freela dev web 
+      2h/D 
+      200USD/M 
+    trading 
+      30m 
+      100USD/M 
+    empree 
+      1:30H 
+      100USD/M 
+
+  posiveis ocorrencias marcantes 
+    MotoSurvival 
+    venda de fork precisium 
+    trading consistente+boot 
+    primeiro contrato100% digital 
+    os 10 primeiros asinantes 
+    0.01 BTC 
+    reforma my home 
+
+  o começo 
+    run 
+      corpEsp 
+        contato 
+        alimentação 
+        meditação 
+        tayoga 
+      estest 
+        filos 
+          sacroEst 
+            4evans 
+            sapientiais 
+            cornelios 
+            levi 
+            clavis 
+          olavMin 
+            minMin 
+            autoedu 
+            Leit.Inteligente 
+            historia essencial 
+          arsLiber 
+            esaApost 
+            artigs 
+        Subtopic 
+      proft 
+    após 3 dias dentro da corrida... vc começou 

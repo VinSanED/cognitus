@@ -1,0 +1,126 @@
+BIBLIOTECA DO COGNITICUS
+
+TRONCO PRINCIPAL
+
+Matemática
+- Fundamentos de Matemática Elementar
+- Precalculus
+- Introduction to Linear Algebra
+- Calculus (Stewart)
+- Calculus (Spivak)
+- Discrete Mathematics and Its Applications
+
+Lógica
+- How to Prove It
+- Introduction to Logic
+- The Art of Reasoning
+
+Computação Fundamental
+- Code
+- Computer Systems: A Programmer's Perspective
+- Algorithms
+- Introduction to Algorithms (CLRS)
+- Operating System Concepts
+- Computer Networking: A Top-Down Approach
+
+Engenharia de Software
+- Clean Architecture
+- Design Patterns
+- Refactoring
+- Domain-Driven Design
+- Implementing Domain-Driven Design
+
+Ciência e Análise de Dados
+- Python for Data Analysis
+- Practical Statistics for Data Scientists
+- The Data Warehouse Toolkit
+- Storytelling with Data
+
+Banco de Dados
+- Database System Concepts
+- Database Design for Mere Mortals
+
+ADS
+- Applying UML and Patterns
+- Software Requirements
+- Writing Effective Use Cases
+
+Produção do Conhecimento
+- The Craft of Research
+- The Elements of Style
+- The Logic of Scientific Discovery
+- The Structure of Scientific Revolutions
+
+Comunicação
+- Made to Stick
+- Presentation Zen
+
+Engenharia do Conhecimento
+- Artificial Intelligence: A Modern Approach
+- Knowledge Representation and Reasoning
+- The Knowledge-Creating Company
+- Conceptual Modeling
+
+Filosofia
+- Organon
+- Posterior Analytics
+- Discourse on Method
+- Critique of Pure Reason
+
+Aprendizagem
+- Make It Stick
+- How Learning Works
+- Ultralearning
+
+EXPANSÃO FREE-EDUCA
+
+Matemática
+- Álgebra
+- Geometria
+- Cálculo
+- Matemática Discreta
+- Estatística
+
+Computação
+- Algoritmos
+- Estruturas de Dados
+- Arquitetura de Computadores
+- Sistemas Operacionais
+- Redes
+- Compiladores
+
+Programação
+- C
+- C++
+- Java
+- Python
+- JavaScript
+- TypeScript
+- Go
+- Rust
+
+Infraestrutura
+- Linux
+- Docker
+- Kubernetes
+- Cloud
+- Segurança
+
+Produtividade Digital
+- LibreOffice
+- OnlyOffice
+- Google Workspace
+- Proton Docs
+- Obsidian
+- Notion
+
+PRINCÍPIO
+
+Conhecimento
+→ Integração
+→ Faculdade Cognitiva
+→ Habilidade
+→ Competência
+→ Capacidade
+→ Serviço
+→ Transformação da Realidade

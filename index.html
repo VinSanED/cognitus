@@ -1,0 +1,1557 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="LifesPlan: mapa pessoal de estudos, competências, projetos e recursos de aprendizagem.">
+  <title>LifesPlan // Central de Conhecimento</title>
+  <link rel="stylesheet" href="assets/css/freeeduca-library.css">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #05080d;
+      --surface: #0a111b;
+      --surface-2: #0d1723;
+      --line: rgba(125, 249, 220, .16);
+      --line-strong: rgba(125, 249, 220, .38);
+      --text: #eefcf9;
+      --muted: #91aaa9;
+      --cyan: #6ef5ff;
+      --lime: #a8ff60;
+      --violet: #c58cff;
+      --amber: #ffd166;
+      --danger: #ff7aa8;
+      --radius: 22px;
+      --shadow: 0 22px 60px rgba(0, 0, 0, .32);
+      --max: 1240px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+    body {
+      margin: 0;
+      min-width: 300px;
+      overflow-x: hidden;
+      background:
+        radial-gradient(circle at 8% 4%, rgba(110, 245, 255, .10), transparent 26rem),
+        radial-gradient(circle at 94% 16%, rgba(197, 140, 255, .08), transparent 28rem),
+        linear-gradient(180deg, #05080d, #07101a 48%, #05080d);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      opacity: .22;
+      background-image:
+        linear-gradient(rgba(110,245,255,.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(110,245,255,.045) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: linear-gradient(to bottom, black, transparent 75%);
+      pointer-events: none;
+    }
+
+    a { color: inherit; }
+    button, input { font: inherit; }
+    button { color: inherit; }
+    code { color: var(--cyan); }
+    :focus-visible { outline: 3px solid var(--cyan); outline-offset: 3px; }
+
+    .skip-link {
+      position: fixed;
+      left: 16px;
+      top: -80px;
+      z-index: 100;
+      padding: 10px 16px;
+      border-radius: 10px;
+      background: var(--lime);
+      color: #051007;
+      font-weight: 800;
+      transition: top .2s;
+    }
+    .skip-link:focus { top: 12px; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      border-bottom: 1px solid var(--line);
+      background: rgba(5, 8, 13, .84);
+      backdrop-filter: blur(18px);
+    }
+    .nav {
+      width: min(var(--max), calc(100% - 32px));
+      min-height: 68px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      font-weight: 900;
+      letter-spacing: .08em;
+      white-space: nowrap;
+    }
+    .brand-mark {
+      width: 34px;
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line-strong);
+      border-radius: 10px;
+      color: var(--lime);
+      box-shadow: inset 0 0 18px rgba(168,255,96,.08), 0 0 18px rgba(110,245,255,.08);
+    }
+    .brand span:last-child { color: var(--cyan); }
+    .nav-links { display: flex; align-items: center; gap: 5px; }
+    .nav-links a {
+      padding: 8px 11px;
+      border-radius: 9px;
+      color: var(--muted);
+      font-size: .9rem;
+      text-decoration: none;
+      transition: .2s ease;
+    }
+    .nav-links a:hover { color: var(--text); background: rgba(110,245,255,.08); }
+    .menu-button { display: none; border: 0; background: transparent; font-size: 1.4rem; }
+
+    .page { width: min(var(--max), calc(100% - 32px)); margin: auto; }
+    .hero {
+      min-height: 620px;
+      display: grid;
+      grid-template-columns: 1.3fr .7fr;
+      align-items: center;
+      gap: 64px;
+      padding: 76px 0 54px;
+    }
+    .hero > * { min-width: 0; }
+    .eyebrow {
+      margin: 0 0 16px;
+      color: var(--lime);
+      font: 800 .76rem/1.4 ui-monospace, SFMono-Regular, Menlo, monospace;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+    h1, h2, h3 { line-height: 1.12; }
+    h1 {
+      max-width: 850px;
+      margin: 0;
+      font-size: clamp(3.4rem, 8vw, 7rem);
+      letter-spacing: -.065em;
+    }
+    .gradient-text {
+      color: transparent;
+      background: linear-gradient(110deg, var(--cyan), var(--lime) 52%, var(--violet));
+      background-clip: text;
+      -webkit-background-clip: text;
+    }
+    .hero-copy {
+      max-width: 720px;
+      margin: 24px 0 0;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2vw, 1.28rem);
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      min-height: 46px;
+      padding: 0 18px;
+      border: 1px solid var(--line-strong);
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 800;
+      transition: transform .2s, border-color .2s, background .2s;
+    }
+    .button:hover { transform: translateY(-2px); border-color: var(--cyan); }
+    .button.primary { background: var(--lime); border-color: var(--lime); color: #061008; }
+
+    .core-orbit {
+      position: relative;
+      width: min(100%, 370px);
+      aspect-ratio: 1;
+      margin: auto;
+      display: grid;
+      place-items: center;
+    }
+    .core-orbit::before, .core-orbit::after {
+      content: "";
+      position: absolute;
+      border: 1px solid var(--line-strong);
+      border-radius: 50%;
+      animation: spin 24s linear infinite;
+    }
+    .core-orbit::before { inset: 5%; border-style: dashed; }
+    .core-orbit::after { inset: 20%; animation-direction: reverse; animation-duration: 16s; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .core-orbit::before, .core-orbit::after { animation: none; }
+    }
+    .core {
+      position: relative;
+      z-index: 2;
+      width: 142px;
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line-strong);
+      border-radius: 32px;
+      background: linear-gradient(145deg, rgba(110,245,255,.14), rgba(168,255,96,.05));
+      box-shadow: 0 0 60px rgba(110,245,255,.14);
+      text-align: center;
+      transform: rotate(45deg);
+    }
+    .core span { transform: rotate(-45deg); font-weight: 900; letter-spacing: .1em; }
+    .satellite {
+      position: absolute;
+      z-index: 3;
+      padding: 7px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--surface);
+      color: var(--muted);
+      font: 700 .72rem ui-monospace, monospace;
+    }
+    .satellite:nth-of-type(1) { top: 8%; left: 42%; }
+    .satellite:nth-of-type(2) { top: 43%; right: -3%; }
+    .satellite:nth-of-type(3) { bottom: 7%; left: 40%; }
+    .satellite:nth-of-type(4) { top: 43%; left: -5%; }
+
+    .signal-strip {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1px;
+      overflow: hidden;
+      margin-bottom: 90px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--line);
+      box-shadow: var(--shadow);
+    }
+    .signal { padding: 22px; background: rgba(10,17,27,.95); }
+    .signal strong { display: block; color: var(--cyan); font-size: 1.55rem; }
+    .signal span { color: var(--muted); font-size: .88rem; }
+
+    .section { padding: 34px 0 86px; }
+    .section-head {
+      display: grid;
+      grid-template-columns: .75fr 1.25fr;
+      gap: 50px;
+      align-items: end;
+      margin-bottom: 32px;
+    }
+    .section-index { color: var(--lime); font: 800 .78rem ui-monospace, monospace; letter-spacing: .12em; }
+    h2 { margin: 8px 0 0; font-size: clamp(2rem, 4.4vw, 4rem); letter-spacing: -.045em; }
+    .section-intro { max-width: 680px; margin: 0; color: var(--muted); font-size: 1.05rem; }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(145deg, rgba(13,23,35,.94), rgba(8,14,23,.92));
+      box-shadow: var(--shadow);
+    }
+    .knowledge-flow {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+      padding: 24px;
+    }
+    .flow-step {
+      position: relative;
+      min-height: 174px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(5,8,13,.52);
+    }
+    .flow-step:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      top: 50%;
+      right: -13px;
+      z-index: 2;
+      width: 24px;
+      color: var(--cyan);
+      background: var(--surface);
+      text-align: center;
+    }
+    .flow-step small { color: var(--cyan); font: 800 .72rem ui-monospace, monospace; }
+    .flow-step h3 { margin: 10px 0 8px; }
+    .flow-step p { margin: 0; color: var(--muted); font-size: .9rem; }
+
+    .pillar-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 18px; }
+    .pillar { padding: 24px; }
+    .pillar-icon { font-size: 1.6rem; }
+    .pillar h3 { margin: 16px 0 9px; }
+    .pillar p { margin: 0; color: var(--muted); }
+    .tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 17px; }
+    .tag {
+      padding: 4px 8px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      font: 700 .72rem ui-monospace, monospace;
+    }
+
+    .trail-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .trail { position: relative; overflow: hidden; padding: 28px; }
+    .trail::after {
+      content: attr(data-number);
+      position: absolute;
+      right: 18px;
+      top: -24px;
+      color: rgba(110,245,255,.045);
+      font-size: 8rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+    .trail-top { position: relative; z-index: 1; display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+    .trail h3 { margin: 0 0 7px; font-size: 1.35rem; }
+    .trail p { margin: 0; color: var(--muted); }
+    .level { padding: 5px 9px; border-radius: 999px; background: rgba(168,255,96,.10); color: var(--lime); font-size: .72rem; font-weight: 800; }
+    .trail ol { position: relative; z-index: 1; margin: 22px 0 0; padding: 0; list-style: none; counter-reset: trail; }
+    .trail li { counter-increment: trail; display: grid; grid-template-columns: 26px 1fr; gap: 9px; margin-top: 11px; color: #c9dcda; font-size: .92rem; }
+    .trail li::before { content: counter(trail, decimal-leading-zero); color: var(--cyan); font: 700 .73rem ui-monospace, monospace; padding-top: 2px; }
+    .trail-links { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: 9px; margin-top: 22px; }
+    .mini-link { color: var(--cyan); font-size: .84rem; font-weight: 800; text-underline-offset: 4px; }
+
+    .matrix { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    details.competence { overflow: hidden; }
+    details.competence summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      min-height: 88px;
+      padding: 20px 24px;
+      cursor: pointer;
+      list-style: none;
+      font-weight: 850;
+      font-size: 1.08rem;
+    }
+    details.competence summary::-webkit-details-marker { display: none; }
+    details.competence summary::after { content: "+"; color: var(--lime); font-size: 1.5rem; font-weight: 400; }
+    details[open].competence summary::after { content: "−"; }
+    .competence-body { padding: 0 24px 24px; border-top: 1px solid var(--line); }
+    .competence-row { display: grid; grid-template-columns: 90px 1fr; gap: 14px; padding-top: 15px; }
+    .competence-row strong { color: var(--cyan); font: 800 .74rem ui-monospace, monospace; text-transform: uppercase; }
+    .competence-row span { color: var(--muted); font-size: .92rem; }
+
+    .library-tools {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+    .search-wrap { position: relative; flex: 1 1 320px; }
+    .search-wrap span { position: absolute; left: 15px; top: 12px; color: var(--muted); }
+    .search {
+      width: 100%;
+      height: 48px;
+      padding: 0 16px 0 43px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--surface);
+      color: var(--text);
+    }
+    .search::placeholder { color: #68807f; }
+    .filters { display: flex; flex-wrap: wrap; gap: 8px; }
+    .filter {
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+    }
+    .filter:hover, .filter.active { border-color: var(--lime); color: var(--text); background: rgba(168,255,96,.08); }
+    .resource-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+    .resource {
+      min-height: 190px;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      transition: transform .2s, border-color .2s;
+    }
+    .resource:hover { transform: translateY(-3px); border-color: var(--line-strong); }
+    .resource[hidden] { display: none; }
+    .resource-meta { display: flex; justify-content: space-between; gap: 12px; color: var(--muted); font: 700 .7rem ui-monospace, monospace; text-transform: uppercase; }
+    .free { color: var(--lime); }
+    .resource h3 { margin: 16px 0 8px; font-size: 1.05rem; }
+    .resource p { flex: 1; margin: 0 0 18px; color: var(--muted); font-size: .88rem; }
+    .resource a { color: var(--cyan); font-weight: 800; font-size: .84rem; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+    .empty-state { grid-column: 1 / -1; display: none; padding: 40px; text-align: center; color: var(--muted); }
+
+    .library-block + .library-block { margin-top: 72px; }
+    .cogniticus-overview { padding: 28px; }
+    .library-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .library-stat {
+      min-height: 124px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: rgba(5,8,13,.52);
+    }
+    .library-stat strong { display: block; color: var(--cyan); font-size: 2rem; line-height: 1; }
+    .library-stat span { display: block; margin-top: 10px; color: var(--muted); font-size: .83rem; }
+    .library-stat small { color: var(--lime); font: 750 .67rem ui-monospace, monospace; text-transform: uppercase; }
+    .principle-title { margin: 30px 0 14px; color: var(--lime); font: 800 .72rem ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase; }
+    .principle-flow { display: grid; grid-template-columns: repeat(8, 1fr); gap: 7px; }
+    .principle-node {
+      position: relative;
+      min-height: 70px;
+      display: grid;
+      place-items: center;
+      padding: 9px;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      background: rgba(110,245,255,.035);
+      color: #cfe2df;
+      font-size: .72rem;
+      font-weight: 780;
+      text-align: center;
+    }
+    .principle-node:not(:last-child)::after {
+      content: "›";
+      position: absolute;
+      right: -7px;
+      z-index: 2;
+      color: var(--lime);
+      font-size: 1.15rem;
+    }
+    .principle-node:last-child { border-color: var(--lime); color: var(--lime); }
+    .overview-links { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 22px; }
+
+    .faculty-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .faculty-card { position: relative; overflow: hidden; min-height: 210px; padding: 22px; }
+    .faculty-card::before { content: ""; position: absolute; inset: 0 0 auto; height: 3px; background: var(--faculty-color); }
+    .faculty-card small { color: var(--faculty-color); font: 800 .68rem ui-monospace, monospace; text-transform: uppercase; }
+    .faculty-card h4 { margin: 13px 0 9px; font-size: 1.08rem; }
+    .faculty-card p { margin: 0; color: var(--muted); font-size: .84rem; }
+    .faculty-card .tags { margin-top: 15px; }
+
+    .route-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 20px; }
+    .route-card { position: relative; padding: 18px; border: 1px solid var(--line); border-radius: 14px; background: rgba(5,8,13,.52); }
+    .route-card:not(:last-child)::after { content: "→"; position: absolute; right: -10px; top: 48%; z-index: 2; color: var(--lime); }
+    .route-card b { color: var(--cyan); font: 850 .72rem ui-monospace, monospace; }
+    .route-card h4 { margin: 10px 0 8px; font-size: .96rem; }
+    .route-card p { margin: 0; color: var(--muted); font-size: .78rem; }
+
+    .catalog-warning {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 12px;
+      margin: 18px 0;
+      padding: 15px 17px;
+      border: 1px solid rgba(255,209,102,.24);
+      border-radius: 13px;
+      background: rgba(255,209,102,.055);
+      color: #dacfab;
+      font-size: .82rem;
+    }
+    .catalog-warning strong { color: var(--amber); }
+    .subsection-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 28px;
+      margin-bottom: 22px;
+    }
+    .subsection-head h3 { margin: 5px 0 0; font-size: clamp(1.65rem, 3vw, 2.5rem); letter-spacing: -.035em; }
+    .subsection-head p { max-width: 580px; margin: 0; color: var(--muted); }
+    .canon-count { color: var(--lime); font: 800 .76rem ui-monospace, monospace; letter-spacing: .1em; }
+    .book-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
+    .book-card {
+      position: relative;
+      min-height: 264px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      padding: 21px 20px 19px 24px;
+      transition: transform .2s, border-color .2s;
+    }
+    .book-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 4px;
+      background: var(--book-color, var(--cyan));
+      box-shadow: 0 0 18px var(--book-color, var(--cyan));
+    }
+    .book-card:hover { transform: translateY(-4px); border-color: var(--line-strong); }
+    .book-card[hidden] { display: none; }
+    .book-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .book-area { color: var(--book-color, var(--cyan)); font: 800 .68rem ui-monospace, monospace; letter-spacing: .08em; text-transform: uppercase; }
+    .book-priority { color: var(--amber); font-size: .72rem; letter-spacing: -.12em; white-space: nowrap; }
+    .book-card h4 { margin: 21px 0 8px; font-size: 1.13rem; line-height: 1.2; }
+    .book-author { margin: 0; color: var(--muted); font-size: .83rem; }
+    .book-note { flex: 1; margin: 16px 0 18px; color: #bfd0ce; font-size: .85rem; }
+    .book-link { color: var(--cyan); font-size: .8rem; font-weight: 850; text-underline-offset: 4px; }
+    .canon-note { margin: 13px 0 0; color: var(--muted); font-size: .82rem; }
+
+    .office-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
+    .office-card { padding: 21px; }
+    .office-card small { color: var(--lime); font: 800 .7rem ui-monospace, monospace; text-transform: uppercase; }
+    .office-card h4 { margin: 12px 0 8px; font-size: 1.06rem; }
+    .office-card p { min-height: 70px; margin: 0 0 17px; color: var(--muted); font-size: .86rem; }
+    .office-card a { color: var(--cyan); font-size: .8rem; font-weight: 800; text-underline-offset: 4px; }
+
+    .mimimi-shell {
+      position: relative;
+      overflow: hidden;
+      padding: 32px;
+    }
+    .mimimi-shell::before {
+      content: "3X";
+      position: absolute;
+      right: -8px;
+      top: -38px;
+      color: rgba(168,255,96,.055);
+      font-size: clamp(8rem, 18vw, 15rem);
+      font-weight: 950;
+      line-height: 1;
+      letter-spacing: -.08em;
+    }
+    .mimimi-hero {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 30px;
+      align-items: stretch;
+    }
+    .mimimi-core-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 300px;
+      padding: 26px;
+      border: 1px solid var(--line-strong);
+      border-radius: 18px;
+      background: radial-gradient(circle at 15% 10%, rgba(168,255,96,.12), transparent 18rem), rgba(5,8,13,.58);
+    }
+    .mimimi-core-card h3 { margin: 8px 0 14px; font-size: clamp(2.1rem, 4vw, 3.7rem); letter-spacing: -.055em; }
+    .mimimi-core-card p { margin: 0; color: var(--muted); }
+    .mimimi-equation { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; margin-top: 24px; }
+    .mimimi-equation span {
+      min-height: 78px;
+      display: grid;
+      place-items: center;
+      padding: 11px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: rgba(110,245,255,.04);
+      color: #d5e6e3;
+      font: 850 .72rem ui-monospace, monospace;
+      text-align: center;
+      text-transform: uppercase;
+    }
+    .mimimi-dashboard { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .mimimi-metric {
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(5,8,13,.52);
+    }
+    .mimimi-metric small { color: var(--lime); font: 800 .68rem ui-monospace, monospace; text-transform: uppercase; }
+    .mimimi-metric strong { display: block; margin-top: 10px; color: var(--cyan); font-size: 1.9rem; line-height: 1; }
+    .mimimi-metric span { display: block; margin-top: 10px; color: var(--muted); font-size: .84rem; }
+    .mimimi-income { margin-top: 18px; padding: 24px; border: 1px solid var(--line); border-radius: 18px; background: rgba(5,8,13,.45); }
+    .mimimi-income-head { display: flex; justify-content: space-between; gap: 18px; margin-bottom: 16px; }
+    .mimimi-income-head h3 { margin: 0; }
+    .mimimi-income-head p { margin: 4px 0 0; color: var(--muted); }
+    .income-summary {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 9px;
+      min-width: 190px;
+    }
+    .income-total { color: var(--lime); font: 900 1.4rem ui-monospace, monospace; white-space: nowrap; }
+    .income-target-control { display: grid; gap: 5px; color: var(--muted); font-size: .72rem; }
+    .income-target-control input,
+    .income-input {
+      min-height: 38px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: rgba(5,8,13,.78);
+      color: var(--text);
+    }
+    .income-target-control input { width: 140px; padding: 0 10px; text-align: right; }
+    .income-bars { display: grid; gap: 13px; }
+    .income-row { display: grid; grid-template-columns: minmax(120px, .9fr) 1.35fr minmax(92px, .55fr) 34px; gap: 12px; align-items: center; color: #cfe2df; font-size: .86rem; }
+    .income-input { width: 100%; padding: 0 10px; }
+    .income-input[type="number"] { text-align: right; }
+    .income-track { height: 10px; overflow: hidden; border-radius: 999px; background: rgba(145,170,169,.15); }
+    .income-fill { display: block; width: var(--income-width); height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--cyan), var(--lime)); box-shadow: 0 0 16px rgba(110,245,255,.22); }
+    .income-remove {
+      width: 34px;
+      height: 34px;
+      border: 1px solid rgba(255,122,168,.24);
+      border-radius: 10px;
+      background: rgba(255,122,168,.055);
+      color: var(--danger);
+      cursor: pointer;
+    }
+    .income-remove:hover { border-color: var(--danger); }
+    .income-actions { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 15px; }
+    .income-action {
+      min-height: 38px;
+      padding: 0 12px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: rgba(110,245,255,.04);
+      color: var(--cyan);
+      cursor: pointer;
+      font-weight: 800;
+      font-size: .82rem;
+    }
+    .income-action:hover { border-color: var(--cyan); }
+    .income-gap { margin: 15px 0 0; color: var(--muted); font-size: .84rem; }
+    .income-gap.good { color: var(--lime); }
+    .income-gap.warning { color: var(--amber); }
+    .mimimi-branches { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 18px; }
+    .mimimi-branch {
+      position: relative;
+      overflow: hidden;
+      min-height: 260px;
+      padding: 21px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(5,8,13,.5);
+    }
+    .mimimi-branch::before { content: ""; position: absolute; inset: 0 0 auto; height: 3px; background: var(--branch-color, var(--cyan)); }
+    .mimimi-branch small { color: var(--branch-color, var(--cyan)); font: 800 .68rem ui-monospace, monospace; text-transform: uppercase; }
+    .mimimi-branch h3 { margin: 13px 0 8px; }
+    .mimimi-branch p { margin: 0 0 14px; color: var(--muted); font-size: .86rem; }
+    .mimimi-branch ul { margin: 0; padding-left: 18px; color: #c9dcda; font-size: .86rem; }
+    .mimimi-branch li + li { margin-top: 5px; }
+    .stability-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 18px; }
+    .stability-card { padding: 21px; }
+    .stability-card small { color: var(--lime); font: 800 .68rem ui-monospace, monospace; text-transform: uppercase; }
+    .stability-card h4 { margin: 12px 0 8px; color: var(--cyan); }
+    .stability-card p { margin: 0; color: var(--muted); font-size: .86rem; }
+    .mimimi-shell .library-block { margin-top: 34px; }
+    .mimimi-source { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 22px; }
+
+    .discipline-shell { overflow: hidden; padding: 32px; }
+    .discipline-layout { display: grid; grid-template-columns: .85fr 1.15fr; gap: 38px; align-items: center; }
+    .discipline-copy h3 { margin: 8px 0 16px; font-size: clamp(2rem, 4vw, 3.5rem); letter-spacing: -.05em; }
+    .discipline-copy p { color: var(--muted); }
+    .discipline-thesis { padding: 16px 18px; border-left: 3px solid var(--lime); background: rgba(168,255,96,.05); color: var(--text) !important; }
+    .knowledge-ladder { display: grid; gap: 8px; }
+    .knowledge-rung {
+      position: relative;
+      width: var(--rung-width);
+      margin-inline: auto;
+      padding: 9px 13px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: rgba(5,8,13,.66);
+      color: #cfe2df;
+      font: 750 .77rem ui-monospace, monospace;
+      text-align: center;
+    }
+    .knowledge-rung:not(:last-child)::after {
+      content: "↓";
+      position: absolute;
+      left: 50%;
+      bottom: -15px;
+      z-index: 2;
+      color: var(--lime);
+      transform: translateX(-50%);
+    }
+    .knowledge-rung:last-child { border-color: var(--lime); color: var(--lime); box-shadow: 0 0 28px rgba(168,255,96,.08); }
+
+    .map-tabs { display: flex; flex-wrap: wrap; gap: 9px; margin-bottom: 18px; }
+    .map-tab { padding: 9px 14px; border: 1px solid var(--line); border-radius: 10px; background: transparent; cursor: pointer; }
+    .map-tab.active { color: #061008; background: var(--lime); border-color: var(--lime); font-weight: 900; }
+    .map-view { display: none; padding: 28px; }
+    .map-view.active { display: block; }
+    .map-view > h3 { margin: 0 0 8px; font-size: 1.55rem; }
+    .map-view > p { margin: 0 0 25px; color: var(--muted); }
+    .branch-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .branch { padding: 20px; border: 1px solid var(--line); border-radius: 15px; background: rgba(5,8,13,.5); }
+    .branch h4 { margin: 0 0 12px; color: var(--cyan); }
+    .branch ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: .9rem; }
+    .branch li + li { margin-top: 6px; }
+
+    .source-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+    .source { padding: 20px; text-decoration: none; transition: border-color .2s, transform .2s; }
+    .source:hover { border-color: var(--cyan); transform: translateY(-2px); }
+    .source small { display: block; color: var(--lime); font: 700 .7rem ui-monospace, monospace; text-transform: uppercase; }
+    .source strong { display: block; margin-top: 7px; }
+    .source span { display: block; margin-top: 4px; color: var(--muted); font-size: .84rem; }
+
+    footer { margin-top: 20px; padding: 34px 0 48px; border-top: 1px solid var(--line); color: var(--muted); }
+    .footer-row { display: flex; justify-content: space-between; gap: 30px; }
+    footer strong { color: var(--text); }
+
+    @media (max-width: 1000px) {
+      .nav-links { display: none; position: absolute; top: 68px; left: 16px; right: 16px; flex-direction: column; align-items: stretch; padding: 12px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); box-shadow: var(--shadow); }
+      .nav-links.open { display: flex; }
+      .menu-button { display: block; }
+      .hero { grid-template-columns: 1fr; min-height: auto; padding-top: 80px; }
+      .core-orbit { width: 300px; }
+      .signal-strip { grid-template-columns: repeat(2, 1fr); }
+      .knowledge-flow { grid-template-columns: 1fr; }
+      .flow-step { min-height: auto; }
+      .flow-step:not(:last-child)::after { content: "↓"; top: auto; right: 50%; bottom: -13px; }
+      .pillar-grid, .resource-grid, .book-grid, .office-grid, .faculty-grid, .mimimi-branches, .stability-grid { grid-template-columns: repeat(2, 1fr); }
+      .library-stats { grid-template-columns: repeat(2, 1fr); }
+      .principle-flow { grid-template-columns: repeat(4, 1fr); }
+      .route-grid { grid-template-columns: 1fr; }
+      .route-card:not(:last-child)::after { content: "↓"; right: 50%; top: auto; bottom: -13px; }
+      .mimimi-hero { grid-template-columns: 1fr; }
+      .discipline-layout { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 700px) {
+      .page, .nav { width: min(100% - 22px, var(--max)); }
+      .hero { gap: 35px; padding-top: 58px; }
+      .hero h1 { font-size: clamp(2.8rem, 13vw, 4.2rem); letter-spacing: -.07em; }
+      .signal-strip, .pillar-grid, .trail-grid, .matrix, .resource-grid, .book-grid, .office-grid, .faculty-grid, .branch-grid, .source-grid, .mimimi-dashboard, .mimimi-branches, .stability-grid { grid-template-columns: 1fr; }
+      .library-stats, .principle-flow { grid-template-columns: 1fr 1fr; }
+      .principle-node:not(:last-child)::after { display: none; }
+      .section-head { grid-template-columns: 1fr; gap: 18px; }
+      .subsection-head { align-items: flex-start; flex-direction: column; gap: 10px; }
+      .section { padding-bottom: 66px; }
+      .core-orbit { width: 260px; }
+      .footer-row { flex-direction: column; }
+      .competence-row { grid-template-columns: 1fr; gap: 4px; }
+      .discipline-shell { padding: 22px; }
+      .mimimi-shell { padding: 22px; }
+      .mimimi-equation { grid-template-columns: 1fr; }
+      .mimimi-income-head { flex-direction: column; }
+      .income-summary { align-items: flex-start; min-width: 0; }
+      .income-target-control input { width: 100%; text-align: left; }
+      .income-row { grid-template-columns: 1fr; }
+      .income-remove { width: 100%; }
+      .cogniticus-overview { padding: 20px; }
+      .knowledge-rung { width: 100% !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="topbar">
+    <nav class="nav" aria-label="Navegação principal">
+      <a class="brand" href="#inicio"><span class="brand-mark">LP</span><span>LIFES<span>PLAN</span></span></a>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Abrir menu">☰</button>
+      <div class="nav-links" id="nav-links">
+        <a href="#sistema">Sistema</a>
+        <a href="#trilhas">Trilhas</a>
+        <a href="#competencias">Competências</a>
+        <a href="#mimimi">Mimimi</a>
+        <a href="#biblioteca">Biblioteca</a>
+        <a href="#mapas">Mapas</a>
+        <a href="#disciplina">Disciplina</a>
+        <a href="#fontes">Arquivos</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="conteudo">
+    <div class="page">
+      <section class="hero" id="inicio">
+        <div>
+          <p class="eyebrow">// sistema pessoal de desenvolvimento</p>
+          <h1>Conhecimento em <span class="gradient-text">movimento.</span></h1>
+          <p class="hero-copy">Um mapa vivo para conectar formação intelectual, competências técnicas, projetos, autonomia e uma rotina capaz de transformar estudo em capacidade real.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#trilhas">Explorar trilhas <span aria-hidden="true">↘</span></a>
+            <a class="button" href="#biblioteca">Abrir biblioteca</a>
+          </div>
+        </div>
+        <div class="core-orbit" aria-label="Núcleo LifesPlan conectado a corpo, intelecto, profissão e autonomia">
+          <div class="core"><span>LIFES<br>PLAN</span></div>
+          <span class="satellite">CORPO</span>
+          <span class="satellite">PROFISSÃO</span>
+          <span class="satellite">AUTONOMIA</span>
+          <span class="satellite">INTELECTO</span>
+        </div>
+      </section>
+
+      <div class="signal-strip" aria-label="Resumo do conteúdo">
+        <div class="signal"><strong>04</strong><span>eixos de desenvolvimento</span></div>
+        <div class="signal"><strong>04</strong><span>trilhas de aprendizagem</span></div>
+        <div class="signal"><strong>47</strong><span>livros no cânone</span></div>
+        <div class="signal"><strong id="resource-count">25</strong><span>recursos selecionados</span></div>
+        <div class="signal"><strong>04</strong><span>mapas pessoais integrados</span></div>
+      </div>
+
+      <section class="section" id="sistema">
+        <div class="section-head">
+          <div><span class="section-index">01 / SISTEMA</span><h2>Da informação ao impacto</h2></div>
+          <p class="section-intro">O centro do projeto não é acumular cursos. É fazer o conhecimento atravessar uma cadeia: compreender, praticar, integrar, construir e produzir uma transformação verificável.</p>
+        </div>
+
+        <div class="knowledge-flow panel" aria-label="Fluxo do conhecimento">
+          <article class="flow-step"><small>01 // ENTRADA</small><h3>Conhecimento</h3><p>Conceitos, teorias, modelos e referências adquiridos por estudo.</p></article>
+          <article class="flow-step"><small>02 // AÇÃO</small><h3>Habilidade</h3><p>Execução prática: programar, analisar, modelar, escrever e testar.</p></article>
+          <article class="flow-step"><small>03 // SÍNTESE</small><h3>Competência</h3><p>Combinação coordenada de saberes e habilidades em contexto.</p></article>
+          <article class="flow-step"><small>04 // ENTREGA</small><h3>Capacidade</h3><p>Aptidão para resolver problemas e construir sistemas reais.</p></article>
+          <article class="flow-step"><small>05 // EVIDÊNCIA</small><h3>Impacto</h3><p>Automação, decisão melhor, renda, autonomia e conhecimento novo.</p></article>
+        </div>
+
+        <div class="pillar-grid">
+          <article class="pillar panel"><span class="pillar-icon">◉</span><h3>Corpo & espírito</h3><p>Base fisiológica, atenção, alimentação consciente, oração, meditação e movimento.</p><div class="tags"><span class="tag">rotina</span><span class="tag">tayoga</span><span class="tag">presença</span></div></article>
+          <article class="pillar panel"><span class="pillar-icon">⌘</span><h3>Intelecto</h3><p>Filosofia, ciências, artes liberais, lógica e métodos de estudo e investigação.</p><div class="tags"><span class="tag">filosofia</span><span class="tag">ciência</span><span class="tag">ars liber</span></div></article>
+          <article class="pillar panel"><span class="pillar-icon">◇</span><h3>Profissão</h3><p>Software, dados, análise de sistemas, conteúdo digital e serviços tecnológicos.</p><div class="tags"><span class="tag">Java</span><span class="tag">web</span><span class="tag">dados</span></div></article>
+          <article class="pillar panel"><span class="pillar-icon">△</span><h3>Autonomia</h3><p>Projetos, renda, organização material e sistemas hídrico, térmico, elétrico e eletrônico.</p><div class="tags"><span class="tag">freela</span><span class="tag">SaaS</span><span class="tag">infra</span></div></article>
+        </div>
+      </section>
+
+      <section class="section" id="trilhas">
+        <div class="section-head">
+          <div><span class="section-index">02 / TRILHAS</span><h2>Rotas para aprender fazendo</h2></div>
+          <p class="section-intro">Cada trilha combina fundamentos, prática e um artefato final. A ordem sugerida reduz dispersão: primeiro compreender, depois construir, por fim integrar ao portfólio.</p>
+        </div>
+
+        <div class="trail-grid">
+          <article class="trail panel" data-number="1">
+            <div class="trail-top"><div><h3>Fundamentos computacionais</h3><p>Da lógica ao funcionamento dos sistemas.</p></div><span class="level">BASE</span></div>
+            <ol><li>Lógica, algoritmos e estruturas de dados</li><li>Como computadores, memória e sistemas operacionais funcionam</li><li>Git, terminal, testes e leitura de documentação</li><li>Projeto: utilitário de linha de comando documentado</li></ol>
+            <div class="trail-links"><a class="mini-link" href="https://cs50.harvard.edu/x/" target="_blank" rel="noopener noreferrer">CS50 ↗</a><a class="mini-link" href="https://teachyourselfcs.com/" target="_blank" rel="noopener noreferrer">Teach Yourself CS ↗</a></div>
+          </article>
+
+          <article class="trail panel" data-number="2">
+            <div class="trail-top"><div><h3>Java, Spring & sistemas</h3><p>Back-end profissional e arquitetura.</p></div><span class="level">PROFISSIONAL</span></div>
+            <ol><li>Java moderno, orientação a objetos e coleções</li><li>Spring Boot, REST, persistência e PostgreSQL</li><li>Testes, segurança, containers e observabilidade</li><li>Projeto: API de negócio implantada e testada</li></ol>
+            <div class="trail-links"><a class="mini-link" href="https://dev.java/learn/" target="_blank" rel="noopener noreferrer">Dev.java ↗</a><a class="mini-link" href="https://spring.io/guides" target="_blank" rel="noopener noreferrer">Spring Guides ↗</a></div>
+          </article>
+
+          <article class="trail panel" data-number="3">
+            <div class="trail-top"><div><h3>Web & produtos digitais</h3><p>Interfaces, APIs e entrega de valor.</p></div><span class="level">CONSTRUÇÃO</span></div>
+            <ol><li>HTML semântico, CSS responsivo e JavaScript</li><li>React/Next.js e consumo de APIs</li><li>UX, acessibilidade, performance e SEO</li><li>Projeto: aplicação full stack útil a um nicho</li></ol>
+            <div class="trail-links"><a class="mini-link" href="https://developer.mozilla.org/pt-BR/docs/Learn_web_development" target="_blank" rel="noopener noreferrer">MDN Learn ↗</a><a class="mini-link" href="https://fullstackopen.com/ptbr/" target="_blank" rel="noopener noreferrer">Full Stack Open ↗</a></div>
+          </article>
+
+          <article class="trail panel" data-number="4">
+            <div class="trail-top"><div><h3>Dados & faculdade analítica</h3><p>De observações brutas a decisões.</p></div><span class="level">ANÁLISE</span></div>
+            <ol><li>Matemática, estatística, probabilidade e SQL</li><li>Python, pandas, visualização e limpeza</li><li>Hipóteses, experimentos e modelos</li><li>Projeto: relatório reproduzível com decisão fundamentada</li></ol>
+            <div class="trail-links"><a class="mini-link" href="https://www.kaggle.com/learn" target="_blank" rel="noopener noreferrer">Kaggle Learn ↗</a><a class="mini-link" href="https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/" target="_blank" rel="noopener noreferrer">MIT Álgebra Linear ↗</a></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="competencias">
+        <div class="section-head">
+          <div><span class="section-index">03 / COMPETÊNCIAS</span><h2>Matriz de capacidades</h2></div>
+          <p class="section-intro">Uma leitura mais operacional dos dados de <code>tableEst.ods</code> e <code>lifesPlan.odt</code>: o que saber, o que praticar e qual evidência concreta produzir.</p>
+        </div>
+
+        <div class="matrix">
+          <details class="competence panel" open><summary>Engenharia de Software</summary><div class="competence-body"><div class="competence-row"><strong>Saber</strong><span>Algoritmos, arquitetura, banco de dados, redes, segurança e testes.</span></div><div class="competence-row"><strong>Praticar</strong><span>Programar, modelar, depurar, documentar, testar e integrar APIs.</span></div><div class="competence-row"><strong>Produzir</strong><span>Aplicação robusta com decisões de arquitetura registradas e testes automatizados.</span></div><div class="competence-row"><strong>Impacto</strong><span>Automação, digitalização e sistemas mais confiáveis e evolutivos.</span></div></div></details>
+          <details class="competence panel"><summary>Ciência & análise de dados</summary><div class="competence-body"><div class="competence-row"><strong>Saber</strong><span>Estatística, SQL, Python, modelagem, visualização e machine learning.</span></div><div class="competence-row"><strong>Praticar</strong><span>Limpar dados, explorar padrões, testar hipóteses e interpretar resultados.</span></div><div class="competence-row"><strong>Produzir</strong><span>Notebook reproduzível, conjunto de dados tratado e dashboard explicativo.</span></div><div class="competence-row"><strong>Impacto</strong><span>Decisões melhores, previsão, detecção de anomalias e redução de desperdício.</span></div></div></details>
+          <details class="competence panel"><summary>Análise de sistemas</summary><div class="competence-body"><div class="competence-row"><strong>Saber</strong><span>Requisitos, processos, UML, UX, negócio, arquitetura e comunicação.</span></div><div class="competence-row"><strong>Praticar</strong><span>Investigar necessidades, modelar fluxos, especificar e validar soluções.</span></div><div class="competence-row"><strong>Produzir</strong><span>Mapa de processo, especificação enxuta e protótipo validado.</span></div><div class="competence-row"><strong>Impacto</strong><span>Menos retrabalho, processos legíveis e soluções alinhadas ao problema.</span></div></div></details>
+          <details class="competence panel"><summary>Conteúdo & comunicação</summary><div class="competence-body"><div class="competence-row"><strong>Saber</strong><span>Design, escrita, vídeo, áudio, storytelling, UX e comunicação visual.</span></div><div class="competence-row"><strong>Praticar</strong><span>Editar, diagramar, explicar, apresentar e adaptar mensagens ao público.</span></div><div class="competence-row"><strong>Produzir</strong><span>Estudo de caso, documentação, tutorial e apresentação de projeto.</span></div><div class="competence-row"><strong>Impacto</strong><span>Conhecimento acessível, educação e comunicação profissional mais clara.</span></div></div></details>
+        </div>
+      </section>
+
+      <section class="section" id="mimimi">
+        <div class="section-head">
+          <div><span class="section-index">04 / MIMIMI</span><h2>Mapa 3X de sustentação</h2></div>
+          <p class="section-intro">O novo mapa mental funciona como um pacto mínimo ampliado: três vezes o mínimo operacional, pessoal, intelectual e financeiro necessário para manter rotina, renda, projetos e propósito no mesmo eixo.</p>
+        </div>
+
+        <div class="mimimi-shell panel">
+          <div class="mimimi-hero">
+            <div class="mimimi-core-card">
+              <div>
+                <span class="eyebrow">// mínimo vital estratégico</span>
+                <h3>mimimi não é reclamação. É lastro.</h3>
+                <p>É o conjunto mínimo que precisa continuar de pé quando a vida aperta: rotina, estabilidade, formação, ordem material e projetos capazes de virar renda e autonomia.</p>
+              </div>
+              <div class="mimimi-equation" aria-label="Equação do mapa mimimi">
+                <span>Vida organizada</span>
+                <span>Produção técnica</span>
+                <span>Renda previsível</span>
+              </div>
+            </div>
+
+            <div class="mimimi-dashboard" aria-label="Resumo do mapa mimimi">
+              <div class="mimimi-metric"><small>Ramos centrais</small><strong>07</strong><span>rotina, renda, SMT, Precisium, estabilidade, OrdemPes e basicForm.</span></div>
+              <div class="mimimi-metric"><small>Meta financeira</small><strong id="income-target-metric">1k USDT</strong><span id="income-progress-note">primeiro marco de renda distribuída por fontes e produtos.</span></div>
+              <div class="mimimi-metric"><small>Projeto primário</small><strong>SMT</strong><span>pesquisa, suporte operacional, arquitetura completa e monetização.</span></div>
+              <div class="mimimi-metric"><small>Núcleo crítico</small><strong>Estabilidade</strong><span>criar e manter um negócio lucrativo, previsível e gerenciável.</span></div>
+            </div>
+          </div>
+
+          <div class="mimimi-income" aria-label="Distribuição da meta de renda 1k USDT">
+            <div class="mimimi-income-head">
+              <div><h3>Meta 1kUSDT · renda em camadas</h3><p id="income-context">Edite nomes e valores para simular fontes de renda. O total, as barras e a lacuna estratégica respondem imediatamente.</p></div>
+              <div class="income-summary">
+                <span class="income-total" id="income-total">0 / 1000</span>
+                <label class="income-target-control">Meta em USDT
+                  <input id="income-target" type="number" min="1" step="10" inputmode="decimal" value="1000" aria-label="Meta total em USDT">
+                </label>
+              </div>
+            </div>
+            <div class="income-bars" id="income-bars" aria-live="polite"></div>
+            <div class="income-actions">
+              <button class="income-action" type="button" id="income-add">+ adicionar fonte</button>
+              <button class="income-action" type="button" id="income-reset">restaurar exemplo</button>
+            </div>
+            <p class="income-gap" id="income-gap">Lacuna estratégica: 1000 USDT.</p>
+          </div>
+
+          <div class="mimimi-branches">
+            <article class="mimimi-branch" style="--branch-color:#a8ff60"><small>01 · Rotina</small><h3>Manutenção diária</h3><p>O corpo e a agenda protegem o plano contra entropia.</p><ul><li>corpEsp e treino mínimo</li><li>estudo estruturado</li><li>dev dedicado</li><li>ordem motoboy</li><li>check semanal de alinhamento</li></ul></article>
+            <article class="mimimi-branch" style="--branch-color:#6ef5ff"><small>02 · SMT</small><h3>Projeto primário</h3><p>Laboratório de pesquisa e ferramenta real de apoio operacional.</p><ul><li>utilidade operacional</li><li>redundância financeira</li><li>pesquisa de estratégias</li><li>arquitetura completa</li><li>monetização validada</li></ul></article>
+            <article class="mimimi-branch" style="--branch-color:#c58cff"><small>03 · SmartMapper</small><h3>Projeto secundário</h3><p>Precisão, performance e atualização segura de alvos.</p><ul><li>operação offline segura</li><li>mecanismo de atualização</li><li>instrumentos performáticos</li><li>suporte à decisão</li><li>ponte para serviços</li></ul></article>
+            <article class="mimimi-branch" style="--branch-color:#ffd166"><small>04 · basicForm</small><h3>Formação de base</h3><p>Básica só no nome — base adequada a ambição grande pede profundidade.</p><ul><li>análise e investigação</li><li>ciências gerais</li><li>artes liberais</li><li>especialização profissional</li><li>filosofia e método</li></ul></article>
+            <article class="mimimi-branch" style="--branch-color:#ff7aa8"><small>05 · OrdemPes</small><h3>Ordem material</h3><p>Casa, moto, recursos e estilo deixam de ser ruído e viram infraestrutura.</p><ul><li>workspace, oficina e laboratório</li><li>kit motoboy sobrevivência</li><li>água, caloria e abrigo</li><li>sistema hídrico</li><li>armário, estilo e recursos</li></ul></article>
+            <article class="mimimi-branch" style="--branch-color:#72ffc1"><small>06 · Estabilidade</small><h3>Negócio previsível</h3><p>O ramo mais importante: sustentar receita sem depender de improviso eterno.</p><ul><li>serviços web e automações</li><li>prospecção e funil</li><li>gestão operacional</li><li>fluxo de caixa</li><li>produtos e nichos</li></ul></article>
+            <article class="mimimi-branch" style="--branch-color:#ff9f68"><small>07 · AnalTech</small><h3>Produto de informação</h3><p>Relatórios, canal, tráfego e assinatura podem transformar análise em recorrência.</p><ul><li>relatórios de análise técnica</li><li>plataforma web/canal</li><li>YouTube, WhatsApp e Instagram</li><li>produção e infraestrutura</li><li>administração financeira</li></ul></article>
+            <article class="mimimi-branch" style="--branch-color:#d0a7ff"><small>08 · Ramo sugerido</small><h3>Sistema de revisão</h3><p>Um mapa 3X precisa de sensores. Sem revisão, vira intenção bonita perdida no limbo.</p><ul><li>placar semanal</li><li>receita prevista vs. real</li><li>tarefas de estabilização</li><li>bloqueios pessoais</li><li>próxima ação concreta</li></ul></article>
+          </div>
+
+          <div class="library-block">
+            <div class="subsection-head">
+              <div><span class="canon-count">PLANO DE ESTABILIZAÇÃO</span><h3>Como transformar o mapa em negócio</h3></div>
+              <p>Eu enriqueci o ramo “estabilidade” como uma sequência operacional: oferta, aquisição, entrega, controle e produto. É aqui que o sonho deixa de ser energia difusa e vira máquina de sobrevivência elegante.</p>
+            </div>
+            <div class="stability-grid">
+              <article class="stability-card panel"><small>01 · Oferta mínima</small><h4>Pacotes vendáveis</h4><p>Transformar web dev, automações, scraping, RPA, APIs e utilitários em 3 ofertas claras: entrada, profissional e recorrente.</p></article>
+              <article class="stability-card panel"><small>02 · Aquisição</small><h4>Prospecção & funil</h4><p>Criar método semanal de contato, diagnóstico, proposta curta, follow-up e registro do progresso operacional.</p></article>
+              <article class="stability-card panel"><small>03 · Entrega</small><h4>Algoritmo operacional</h4><p>Definir prioridades, prazos, checklist de qualidade, documentação e limite de escopo para não vender caos disfarçado de oportunidade.</p></article>
+              <article class="stability-card panel"><small>04 · Financeiro</small><h4>Fluxo de caixa</h4><p>Separar receita, custos, reserva, reinvestimento e retirada. A estabilidade nasce quando o dinheiro ganha destino antes de virar impulso.</p></article>
+              <article class="stability-card panel"><small>05 · Produto</small><h4>Do serviço ao ativo</h4><p>Reaproveitar padrões de entrega para criar templates, microferramentas, relatórios, assinatura AnalTech ou um micro-SaaS simples.</p></article>
+              <article class="stability-card panel"><small>06 · Proteção</small><h4>Anti-colapso pessoal</h4><p>Manter rotina mínima, ordem da casa, kit de trabalho, moto pronta e revisão semanal para evitar que problemas materiais devorem os projetos.</p></article>
+            </div>
+          </div>
+
+          <div class="mimimi-source">
+            <a class="button primary" href="mimimi_map.json">Abrir mimimi_map.json</a>
+            <a class="button" href="#mapas">Ver mapas integrados</a>
+            <a class="button" href="#biblioteca">Alimentar basicForm</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="biblioteca">
+        <div class="section-head">
+          <div><span class="section-index">05 / BIBLIOTECA</span><h2>Base de estudo curada</h2></div>
+          <p class="section-intro">Uma arquitetura em camadas: tronco bibliográfico, expansão prática, faculdades cognitivas e uma ordem de estudo que conduz o conhecimento até a transformação da realidade.</p>
+        </div>
+
+        <div class="library-block">
+          <div class="subsection-head">
+            <div><span class="canon-count">MAPA MESTRE · COGNITICUS</span><h3>Arquitetura da biblioteca</h3></div>
+            <p>Os novos arquivos deixam claro que a biblioteca não é apenas uma coleção. Ela é um sistema de formação: núcleo, expansão, integração cognitiva e aplicação.</p>
+          </div>
+          <div class="cogniticus-overview panel">
+            <div class="library-stats">
+              <div class="library-stat"><small>Cânone ampliado</small><strong>47</strong><span>46 obras do tronco + 1 extensão de arquitetura da informação.</span></div>
+              <div class="library-stat"><small>Expansão FreeEduca</small><strong>401</strong><span>obras catalogadas em doze áreas de estudo.</span></div>
+              <div class="library-stat"><small>Integração</small><strong>07</strong><span>faculdades cognitivas desenvolvidas pelo acervo.</span></div>
+              <div class="library-stat"><small>Execução</small><strong>05</strong><span>etapas na ordem pessoal de aprofundamento.</span></div>
+            </div>
+            <p class="principle-title">Princípio operacional completo</p>
+            <div class="principle-flow" aria-label="Princípio operacional da Biblioteca Cogniticus">
+              <div class="principle-node">Conhecimento</div>
+              <div class="principle-node">Integração</div>
+              <div class="principle-node">Faculdade cognitiva</div>
+              <div class="principle-node">Habilidade</div>
+              <div class="principle-node">Competência</div>
+              <div class="principle-node">Capacidade</div>
+              <div class="principle-node">Serviço</div>
+              <div class="principle-node">Transformação da realidade</div>
+            </div>
+            <div class="overview-links">
+              <a class="button primary" href="#freeeduca">Explorar expansão</a>
+              <a class="button" href="Biblioteca_Cogniticus_Organizada.txt">Abrir mapa mestre</a>
+              <a class="button" href="Biblioteca_Cogniticus_FreeEduca_Com_Links.md">Abrir catálogo com links</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="library-block">
+          <div class="subsection-head">
+            <div><span class="canon-count">07 FACULDADES COGNITIVAS</span><h3>O que cada parte do acervo desenvolve</h3></div>
+            <p>As áreas deixam de ser silos quando são lidas pelo tipo de inteligência que exercitam e pela capacidade real que ajudam a construir.</p>
+          </div>
+          <div class="faculty-grid">
+            <article class="faculty-card panel" style="--faculty-color:#a8ff60"><small>01 · Faculdade</small><h4>Computacional</h4><p>Lógica, algoritmos, programação, arquitetura e funcionamento interno dos computadores.</p><div class="tags"><span class="tag">algoritmos</span><span class="tag">linguagens</span><span class="tag">sistemas</span></div></article>
+            <article class="faculty-card panel" style="--faculty-color:#ffd166"><small>02 · Faculdade</small><h4>Arquitetônica</h4><p>Projeto de sistemas robustos, modulares, testáveis, compreensíveis e evolutivos.</p><div class="tags"><span class="tag">design</span><span class="tag">requisitos</span><span class="tag">qualidade</span></div></article>
+            <article class="faculty-card panel" style="--faculty-color:#6ef5ff"><small>03 · Faculdade</small><h4>Analítica</h4><p>Organização de dados, interpretação de padrões, elaboração de modelos e apoio à decisão.</p><div class="tags"><span class="tag">matemática</span><span class="tag">dados</span><span class="tag">evidência</span></div></article>
+            <article class="faculty-card panel" style="--faculty-color:#ff9f68"><small>04 · Faculdade</small><h4>Operacional</h4><p>Infraestrutura, Linux, redes, cloud, containers, segurança e automação de operações.</p><div class="tags"><span class="tag">Linux</span><span class="tag">DevOps</span><span class="tag">cloud</span></div></article>
+            <article class="faculty-card panel" style="--faculty-color:#ff7aa8"><small>05 · Faculdade</small><h4>Tecnicus</h4><p>Integração entre computação, eletrônica, robótica, fabricação e automação física.</p><div class="tags"><span class="tag">Arduino</span><span class="tag">robótica</span><span class="tag">CNC</span></div></article>
+            <article class="faculty-card panel" style="--faculty-color:#c58cff"><small>06 · Faculdade</small><h4>Comunicacional & visual</h4><p>Design, computação gráfica, mídia e representação visual de ideias e sistemas.</p><div class="tags"><span class="tag">design</span><span class="tag">gráficos</span><span class="tag">mídia</span></div></article>
+            <article class="faculty-card panel" style="--faculty-color:#72ffc1"><small>07 · Faculdade</small><h4>Empreendedora</h4><p>Produto, startups, negócio, criação de valor e transformação econômica.</p><div class="tags"><span class="tag">produto</span><span class="tag">negócio</span><span class="tag">valor</span></div></article>
+          </div>
+        </div>
+
+        <div class="library-block">
+          <div class="subsection-head">
+            <div><span class="canon-count">ORDEM SUGERIDA · 05 ETAPAS</span><h3>Sequência de aprofundamento</h3></div>
+            <p>Uma progressão pragmática extraída do catálogo: entender a máquina, projetar bem, trabalhar com informação, operar sistemas e então integrar o mundo físico.</p>
+          </div>
+          <div class="route-grid">
+            <article class="route-card"><b>01</b><h4>Computação fundamental</h4><p>Code, algoritmos, arquitetura, sistemas operacionais e redes.</p></article>
+            <article class="route-card"><b>02</b><h4>Engenharia de software</h4><p>Código limpo, arquitetura, padrões, requisitos e testes.</p></article>
+            <article class="route-card"><b>03</b><h4>Dados & informação</h4><p>Ciência de dados, SQL, modelagem, visualização e relatórios.</p></article>
+            <article class="route-card"><b>04</b><h4>Infraestrutura</h4><p>Linux, shell, Git, Docker, cloud e segurança operacional.</p></article>
+            <article class="route-card"><b>05</b><h4>Tecnicus futuro</h4><p>Arduino, eletrônica, robótica, embarcados, CNC e automação.</p></article>
+          </div>
+        </div>
+
+        <div class="library-block" id="freeeduca">
+          <div class="subsection-head">
+            <div><span class="canon-count">EXPANSÃO FREEEDUCA · 401 OBRAS</span><h3>Acervo navegável completo</h3></div>
+            <p>Doze áreas, busca instantânea, filtros e paginação. Cada card abre exatamente o caminho externo registrado no novo catálogo Markdown.</p>
+          </div>
+          <div class="catalog-warning"><span aria-hidden="true">⚠</span><div><strong>Catálogo externo não verificado.</strong> Os links abaixo reproduzem as URLs fornecidas em <code>Biblioteca_Cogniticus_FreeEduca_Com_Links.md</code>. A listagem não garante licença, disponibilidade ou permissão de distribuição. Verifique origem e direitos antes de acessar, obter ou compartilhar qualquer obra.</div></div>
+
+          <div class="fe-shell panel" id="freeeduca-catalog">
+            <div class="fe-summary" aria-label="Resumo do catálogo FreeEduca">
+              <div class="fe-summary-item"><strong>401</strong><span>obras catalogadas</span></div>
+              <div class="fe-summary-item"><strong>12</strong><span>áreas organizadas</span></div>
+              <div class="fe-summary-item"><strong>24</strong><span>cards por página</span></div>
+              <div class="fe-summary-item"><strong>GitHub</strong><span>origem externa declarada</span></div>
+            </div>
+
+            <div class="fe-toolbar">
+              <label class="fe-search-wrap"><span aria-hidden="true">⌕</span><input class="fe-search" id="freeeduca-search" type="search" placeholder="Buscar entre 401 obras..." aria-label="Buscar no catálogo FreeEduca"></label>
+              <label><select class="fe-sort" id="freeeduca-sort" aria-label="Ordenar catálogo"><option value="category">Ordem do catálogo</option><option value="title">Título A–Z</option></select></label>
+              <button class="fe-clear" id="freeeduca-clear" type="button" hidden>Limpar filtros</button>
+            </div>
+
+            <div class="fe-filters" id="freeeduca-filters" aria-label="Filtrar catálogo por área"></div>
+            <div class="fe-results-bar"><span id="freeeduca-result-count">401 obras encontradas</span><span id="freeeduca-page-info">Página 1 de 17</span></div>
+            <div class="fe-card-grid" id="freeeduca-card-grid" aria-live="polite"></div>
+            <p class="fe-empty" id="freeeduca-empty" hidden>Nenhuma obra corresponde à busca e ao filtro selecionados.</p>
+            <nav class="fe-pagination" id="freeeduca-pagination" aria-label="Paginação do catálogo"></nav>
+
+            <div class="fe-provenance">
+              <span>Dados gerados do arquivo Markdown local; links abrem em nova aba.</span>
+              <div><a href="Biblioteca_Cogniticus_FreeEduca_Com_Links.md">Ver fonte local</a> · <a href="https://github.com/free-educa/free-books/tree/master/books" target="_blank" rel="noopener noreferrer">Ver repositório declarado ↗</a></div>
+            </div>
+            <noscript><p class="fe-empty">Ative o JavaScript para navegar pelos cards ou abra o <a href="Biblioteca_Cogniticus_FreeEduca_Com_Links.md">catálogo Markdown</a>.</p></noscript>
+          </div>
+        </div>
+
+        <div class="library-block">
+          <div class="subsection-head">
+            <div><span class="canon-count">47 LIVROS · 46 DO TRONCO + 1 EXTENSÃO</span><h3>Cânone Cogniticus</h3></div>
+            <p>Uma biblioteca nuclear: os melhores livros para construir fundamentos, pensamento rigoroso, competência técnica e capacidade de produzir conhecimento.</p>
+          </div>
+          <div class="library-tools">
+            <label class="search-wrap"><span aria-hidden="true">⌕</span><input class="search" id="book-search" type="search" placeholder="Buscar livro, autor ou área..." aria-label="Buscar livros"></label>
+            <div class="filters" aria-label="Filtrar livros">
+              <button class="book-filter filter active" type="button" data-book-filter="all">Todos</button>
+              <button class="book-filter filter" type="button" data-book-filter="essential">⭐⭐⭐⭐⭐</button>
+              <button class="book-filter filter" type="button" data-book-filter="matematica">Matemática</button>
+              <button class="book-filter filter" type="button" data-book-filter="logica">Lógica</button>
+              <button class="book-filter filter" type="button" data-book-filter="computacao">Computação</button>
+              <button class="book-filter filter" type="button" data-book-filter="software">Software</button>
+              <button class="book-filter filter" type="button" data-book-filter="dados">Dados</button>
+              <button class="book-filter filter" type="button" data-book-filter="sistemas">ADS & BD</button>
+              <button class="book-filter filter" type="button" data-book-filter="conhecimento">Conhecimento</button>
+              <button class="book-filter filter" type="button" data-book-filter="comunicacao">Comunicação</button>
+              <button class="book-filter filter" type="button" data-book-filter="filosofia">Filosofia</button>
+              <button class="book-filter filter" type="button" data-book-filter="aprendizagem">Aprendizagem</button>
+            </div>
+          </div>
+          <div class="book-grid" id="book-grid" aria-live="polite"></div>
+          <p class="empty-state panel" id="book-empty">Nenhum livro encontrado. Tente outro termo ou área.</p>
+          <p class="canon-note">As cinco estrelas indicam a rota obrigatória sugerida. “Localizar edição” abre uma busca bibliográfica; prefira a edição mais recente ou uma boa tradução disponível.</p>
+        </div>
+
+        <div class="library-block">
+          <div class="subsection-head">
+            <div><span class="canon-count">ESTAÇÃO PRÁTICA · OFFICE</span><h3>Certificação e automação</h3></div>
+            <p>Para Office, prática guiada e certificação fazem mais sentido que uma estante de livros. O eixo é dominar a ferramenta e automatizar o trabalho.</p>
+          </div>
+          <div class="office-grid">
+            <article class="office-card panel"><small>Certificação ⭐⭐⭐⭐⭐</small><h4>Microsoft Office Specialist</h4><p>Rota Associate/Expert para comprovar domínio de Word, Excel e PowerPoint.</p><a href="https://learn.microsoft.com/en-us/credentials/certifications/microsoft-office-specialist-expert-m365-apps/" target="_blank" rel="noopener noreferrer">Ver certificação ↗</a></article>
+            <article class="office-card panel"><small>Automação</small><h4>VBA para Office</h4><p>Macros, objetos e automação programável de tarefas nos aplicativos Office.</p><a href="https://learn.microsoft.com/en-us/office/vba/library-reference/concepts/getting-started-with-vba-in-office" target="_blank" rel="noopener noreferrer">Abrir documentação ↗</a></article>
+            <article class="office-card panel"><small>Dados</small><h4>Power Query</h4><p>Importação, limpeza, transformação e integração reproduzível de dados.</p><a href="https://learn.microsoft.com/en-us/power-query/" target="_blank" rel="noopener noreferrer">Estudar Power Query ↗</a></article>
+            <article class="office-card panel"><small>Modelagem</small><h4>Power Pivot</h4><p>Modelos relacionais, medidas, análises e inteligência dentro do Excel.</p><a href="https://support.microsoft.com/en-us/office/power-pivot-overview-and-learning-f9001958-7901-4caa-ad80-028a6d2432ed" target="_blank" rel="noopener noreferrer">Conhecer Power Pivot ↗</a></article>
+          </div>
+        </div>
+
+        <div class="library-block">
+          <div class="subsection-head">
+            <div><span class="canon-count">CURSOS · CANAIS · DOCUMENTAÇÃO</span><h3>Recursos para estudar e praticar</h3></div>
+            <p>O cânone dá profundidade; estes materiais dão ritmo, demonstração, exercícios e documentação de referência.</p>
+          </div>
+        <div class="library-tools">
+          <label class="search-wrap"><span aria-hidden="true">⌕</span><input class="search" id="resource-search" type="search" placeholder="Buscar por Java, matemática, dados..." aria-label="Buscar recursos"></label>
+          <div class="filters" aria-label="Filtrar recursos">
+            <button class="filter active" type="button" data-filter="all">Todos</button>
+            <button class="filter" type="button" data-filter="computacao">Computação</button>
+            <button class="filter" type="button" data-filter="web">Web</button>
+            <button class="filter" type="button" data-filter="dados">Dados</button>
+            <button class="filter" type="button" data-filter="matematica">Matemática</button>
+            <button class="filter" type="button" data-filter="intelecto">Intelecto</button>
+            <button class="filter" type="button" data-filter="ferramentas">Ferramentas</button>
+          </div>
+        </div>
+
+        <div class="resource-grid" id="resource-grid">
+          <article class="resource panel" data-category="computacao" data-search="cs50 harvard ciência computação programação algoritmos"><div class="resource-meta"><span>Computação</span><span class="free">Grátis</span></div><h3>Harvard CS50x</h3><p>Introdução rigorosa à computação, algoritmos e programação com exercícios.</p><a href="https://cs50.harvard.edu/x/" target="_blank" rel="noopener noreferrer">Acessar curso ↗</a></article>
+          <article class="resource panel" data-category="computacao" data-search="teach yourself computer science sistemas algoritmos arquitetura"><div class="resource-meta"><span>Computação</span><span class="free">Guia</span></div><h3>Teach Yourself CS</h3><p>Currículo independente para os fundamentos duráveis da ciência da computação.</p><a href="https://teachyourselfcs.com/" target="_blank" rel="noopener noreferrer">Ver currículo ↗</a></article>
+          <article class="resource panel" data-category="computacao" data-search="java oracle linguagem jvm orientação objetos"><div class="resource-meta"><span>Java</span><span class="free">Oficial</span></div><h3>Dev.java — Learn</h3><p>Trilha oficial de Java: linguagem, coleções, streams, ferramentas e práticas.</p><a href="https://dev.java/learn/" target="_blank" rel="noopener noreferrer">Estudar Java ↗</a></article>
+          <article class="resource panel" data-category="computacao" data-search="spring boot java api rest backend"><div class="resource-meta"><span>Java / Back-end</span><span class="free">Oficial</span></div><h3>Spring Guides</h3><p>Guias curtos para construir APIs, acessar dados, testar e publicar aplicações.</p><a href="https://spring.io/guides" target="_blank" rel="noopener noreferrer">Abrir guias ↗</a></article>
+          <article class="resource panel" data-category="computacao" data-search="postgresql sql banco dados tutorial"><div class="resource-meta"><span>Banco de dados</span><span class="free">Oficial</span></div><h3>PostgreSQL Tutorial</h3><p>Introdução oficial ao modelo relacional, SQL, consultas, joins e recursos avançados.</p><a href="https://www.postgresql.org/docs/current/tutorial.html" target="_blank" rel="noopener noreferrer">Ler tutorial ↗</a></article>
+          <article class="resource panel" data-category="computacao" data-search="git versionamento pro git livro"><div class="resource-meta"><span>Ferramenta dev</span><span class="free">Livro grátis</span></div><h3>Pro Git</h3><p>Livro completo sobre versionamento, branches, colaboração e funcionamento interno.</p><a href="https://git-scm.com/book/pt-br/v2" target="_blank" rel="noopener noreferrer">Ler em português ↗</a></article>
+
+          <article class="resource panel" data-category="web" data-search="mdn html css javascript web acessibilidade"><div class="resource-meta"><span>Web</span><span class="free">Referência</span></div><h3>MDN Learn Web</h3><p>Currículo estruturado de HTML, CSS, JavaScript, acessibilidade e boas práticas.</p><a href="https://developer.mozilla.org/pt-BR/docs/Learn_web_development" target="_blank" rel="noopener noreferrer">Abrir MDN ↗</a></article>
+          <article class="resource panel" data-category="web" data-search="full stack open react node typescript graphql containers"><div class="resource-meta"><span>Full stack</span><span class="free">Grátis</span></div><h3>Full Stack Open</h3><p>Curso da Universidade de Helsinque sobre React, APIs, testes e entrega moderna.</p><a href="https://fullstackopen.com/ptbr/" target="_blank" rel="noopener noreferrer">Iniciar curso ↗</a></article>
+          <article class="resource panel" data-category="web" data-search="odin project html css javascript node full stack"><div class="resource-meta"><span>Web</span><span class="free">Projetos</span></div><h3>The Odin Project</h3><p>Currículo web aberto, orientado a projetos e construção de portfólio.</p><a href="https://www.theodinproject.com/paths" target="_blank" rel="noopener noreferrer">Escolher trilha ↗</a></article>
+
+          <article class="resource panel" data-category="dados" data-search="kaggle python pandas sql machine learning dados"><div class="resource-meta"><span>Dados</span><span class="free">Prática</span></div><h3>Kaggle Learn</h3><p>Microcursos de Python, pandas, SQL, visualização e machine learning.</p><a href="https://www.kaggle.com/learn" target="_blank" rel="noopener noreferrer">Praticar ↗</a></article>
+          <article class="resource panel" data-category="dados" data-search="pandas python análise dados documentação"><div class="resource-meta"><span>Dados / Python</span><span class="free">Oficial</span></div><h3>pandas Getting Started</h3><p>Tutoriais oficiais para tabelas, limpeza, seleção, agregação e séries temporais.</p><a href="https://pandas.pydata.org/docs/getting_started/index.html" target="_blank" rel="noopener noreferrer">Abrir tutoriais ↗</a></article>
+          <article class="resource panel" data-category="dados" data-search="scikit learn machine learning modelos python"><div class="resource-meta"><span>Machine learning</span><span class="free">Oficial</span></div><h3>scikit-learn MOOC</h3><p>Curso aberto criado por colaboradores do ecossistema scikit-learn.</p><a href="https://inria.github.io/scikit-learn-mooc/" target="_blank" rel="noopener noreferrer">Acessar MOOC ↗</a></article>
+
+          <article class="resource panel" data-category="matematica" data-search="mit linear algebra gilbert strang álgebra linear"><div class="resource-meta"><span>Matemática</span><span class="free">MIT OCW</span></div><h3>Linear Algebra — Strang</h3><p>Aulas, exercícios e provas de um dos cursos clássicos de álgebra linear.</p><a href="https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/" target="_blank" rel="noopener noreferrer">Abrir curso ↗</a></article>
+          <article class="resource panel" data-category="matematica" data-search="3blue1brown matemática visual cálculo álgebra"><div class="resource-meta"><span>Matemática visual</span><span class="free">Vídeos</span></div><h3>3Blue1Brown</h3><p>Intuição visual para cálculo, álgebra linear, probabilidade e redes neurais.</p><a href="https://www.3blue1brown.com/topics" target="_blank" rel="noopener noreferrer">Explorar tópicos ↗</a></article>
+          <article class="resource panel" data-category="matematica" data-search="khan academy matemática estatística cálculo português"><div class="resource-meta"><span>Matemática</span><span class="free">Exercícios</span></div><h3>Khan Academy</h3><p>Formação progressiva com explicações e exercícios de domínio.</p><a href="https://pt.khanacademy.org/math" target="_blank" rel="noopener noreferrer">Estudar matemática ↗</a></article>
+
+          <article class="resource panel" data-category="intelecto" data-search="stanford encyclopedia philosophy filosofia enciclopédia"><div class="resource-meta"><span>Filosofia</span><span class="free">Referência</span></div><h3>Stanford Encyclopedia</h3><p>Artigos acadêmicos revisados sobre autores, problemas e tradições filosóficas.</p><a href="https://plato.stanford.edu/" target="_blank" rel="noopener noreferrer">Consultar ↗</a></article>
+          <article class="resource panel" data-category="intelecto" data-search="internet encyclopedia philosophy filosofia"><div class="resource-meta"><span>Filosofia</span><span class="free">Referência</span></div><h3>Internet Encyclopedia of Philosophy</h3><p>Introduções confiáveis e acessíveis a conceitos e pensadores.</p><a href="https://iep.utm.edu/" target="_blank" rel="noopener noreferrer">Consultar ↗</a></article>
+          <article class="resource panel" data-category="intelecto" data-search="craft research pesquisa escrita universidade chicago"><div class="resource-meta"><span>Pesquisa</span><span>Livro</span></div><h3>The Craft of Research</h3><p>Método para formular perguntas, construir argumentos e comunicar resultados.</p><a href="https://press.uchicago.edu/ucp/books/book/chicago/C/bo23521678.html" target="_blank" rel="noopener noreferrer">Ver editora ↗</a></article>
+          <article class="resource panel" data-category="intelecto" data-search="learning scientists aprendizagem memória retrieval spacing"><div class="resource-meta"><span>Aprendizagem</span><span class="free">Evidências</span></div><h3>The Learning Scientists</h3><p>Estratégias de estudo baseadas em evidências: recuperação, espaçamento e elaboração.</p><a href="https://www.learningscientists.org/downloadable-materials" target="_blank" rel="noopener noreferrer">Baixar materiais ↗</a></article>
+
+          <article class="resource panel" data-category="ferramentas" data-search="obsidian notas conhecimento markdown"><div class="resource-meta"><span>Conhecimento</span><span class="free">Ferramenta</span></div><h3>Obsidian Help</h3><p>Notas conectadas em Markdown para construir uma base pessoal de conhecimento.</p><a href="https://help.obsidian.md/" target="_blank" rel="noopener noreferrer">Ler documentação ↗</a></article>
+          <article class="resource panel" data-category="ferramentas" data-search="zotero referências pesquisa bibliografia"><div class="resource-meta"><span>Pesquisa</span><span class="free">Open source</span></div><h3>Zotero</h3><p>Organização de referências, PDFs, citações e bibliografias.</p><a href="https://www.zotero.org/support/quick_start_guide" target="_blank" rel="noopener noreferrer">Guia rápido ↗</a></article>
+          <article class="resource panel" data-category="ferramentas" data-search="libreoffice writer calc impress documentação escritório"><div class="resource-meta"><span>Produtividade</span><span class="free">Open source</span></div><h3>LibreOffice Guides</h3><p>Guias oficiais para documentos, planilhas, apresentações e automação.</p><a href="https://documentation.libreoffice.org/en/english-documentation/" target="_blank" rel="noopener noreferrer">Abrir guias ↗</a></article>
+          <article class="resource panel" data-category="ferramentas" data-search="docker containers desenvolvimento devops"><div class="resource-meta"><span>DevOps</span><span class="free">Oficial</span></div><h3>Docker Get Started</h3><p>Fundamentos de imagens, containers, persistência e aplicações multi-container.</p><a href="https://docs.docker.com/get-started/" target="_blank" rel="noopener noreferrer">Começar ↗</a></article>
+          <article class="resource panel" data-category="ferramentas" data-search="roadmap developer backend java computer science devops"><div class="resource-meta"><span>Planejamento</span><span class="free">Mapas</span></div><h3>roadmap.sh</h3><p>Mapas comunitários para back-end, Java, ciência da computação e DevOps.</p><a href="https://roadmap.sh/" target="_blank" rel="noopener noreferrer">Ver roadmaps ↗</a></article>
+          <article class="resource panel" data-category="ferramentas" data-search="google workspace developers api automação escritório"><div class="resource-meta"><span>Automação</span><span class="free">Oficial</span></div><h3>Google Workspace Developers</h3><p>APIs e automações para documentos, planilhas, agenda e produtividade.</p><a href="https://developers.google.com/workspace" target="_blank" rel="noopener noreferrer">Explorar APIs ↗</a></article>
+          <p class="empty-state panel" id="empty-state">Nenhum recurso encontrado. Tente um termo mais amplo.</p>
+        </div>
+        </div>
+      </section>
+
+      <section class="section" id="mapas">
+        <div class="section-head">
+          <div><span class="section-index">06 / MAPAS</span><h2>O território pessoal</h2></div>
+          <p class="section-intro">Os mapas-base foram sintetizados em visões legíveis. Eles não são uma fila única de tarefas: mostram camadas complementares de precisão, identidade, estabilidade e construção.</p>
+        </div>
+
+        <div class="map-tabs" role="tablist" aria-label="Selecionar mapa">
+          <button class="map-tab active" id="tab-map1" role="tab" aria-selected="true" aria-controls="map1" data-map="map1">Mapa 1 · Estabilidade</button>
+          <button class="map-tab" id="tab-map2" role="tab" aria-selected="false" aria-controls="map2" data-map="map2">Mapa 2 · Mínimo Vinsan</button>
+          <button class="map-tab" id="tab-map3" role="tab" aria-selected="false" aria-controls="map3" data-map="map3">Mapa 3 · Construção</button>
+        </div>
+
+        <article class="map-view panel active" id="map1" role="tabpanel" aria-labelledby="tab-map1">
+          <h3>Precisão → estabilidade → estrutura</h3><p>O primeiro mapa conecta desempenho técnico, renda previsível, ordem pessoal e formação básica.</p>
+          <div class="branch-grid"><div class="branch"><h4>Precisão & SMT</h4><ul><li>Performance e segurança</li><li>Pesquisa de técnicas e estratégias</li><li>Utilidade operacional</li><li>Arquitetura e monetização</li></ul></div><div class="branch"><h4>Estabilidade</h4><ul><li>Receita e fontes de renda</li><li>Serviços, produtos e trading</li><li>Marketing e gestão operacional</li><li>Administração financeira</li></ul></div><div class="branch"><h4>Ordem & formação</h4><ul><li>Casa, oficina e laboratório</li><li>Rotina corporal e espiritual</li><li>Ciências gerais e artes liberais</li><li>Formação profissional e filosofia</li></ul></div></div>
+        </article>
+        <article class="map-view panel" id="map2" role="tabpanel" aria-labelledby="tab-map2" hidden>
+          <h3>Identidade → projetos → conquistas</h3><p>O segundo mapa define arquétipos de atuação e os liga a projetos, renda e marcos concretos.</p>
+          <div class="branch-grid"><div class="branch"><h4>Arquétipos</h4><ul><li>OfficeBoy empreendedor</li><li>Desenvolvedor</li><li>Trader</li><li>Aprendiz, filósofo e construtor</li></ul></div><div class="branch"><h4>Projetos & renda</h4><ul><li>Precisium, Smart Mapper e VSP</li><li>Java/Spring, React/Next e bancos</li><li>Freela web, trading e negócio</li><li>Serviços e SaaS simples</li></ul></div><div class="branch"><h4>Conquistas</h4><ul><li>Área de trabalho e ferramental</li><li>Sistemas hídrico e elétrico</li><li>Primeiro contrato digital</li><li>Rotina sustentada por três dias</li></ul></div></div>
+        </article>
+        <article class="map-view panel" id="map3" role="tabpanel" aria-labelledby="tab-map3" hidden>
+          <h3>Construção material + construção digital</h3><p>O terceiro mapa une projetos hard e soft a uma missão inicial: estabilizar renda, organizar rotina e consolidar formação.</p>
+          <div class="branch-grid"><div class="branch"><h4>Hard</h4><ul><li>Estufa inteligente</li><li>Painéis e motores</li><li>Drone, EPI e iluminação</li><li>Engenharia eletromecatrônica</li></ul></div><div class="branch"><h4>Soft</h4><ul><li>Precisium</li><li>Smart Trader e AnalTech</li><li>Smart Mapper</li><li>Inteligência artificial</li></ul></div><div class="branch"><h4>Preparação</h4><ul><li>Renda e rotina eficiente</li><li>Formação filosófica e científica</li><li>Software e eletromecatrônica</li><li>Casa, laboratório e oficina</li></ul></div></div>
+        </article>
+      </section>
+
+      <section class="section" id="disciplina">
+        <div class="section-head">
+          <div><span class="section-index">07 / DISCIPLINA</span><h2>Engenharia do Conhecimento Integrado</h2></div>
+          <p class="section-intro">Uma disciplina transversal para transformar informação dispersa em modelos compreensíveis, sistemas úteis, decisões fundamentadas e conhecimento comunicável.</p>
+        </div>
+        <div class="discipline-shell panel">
+          <div class="discipline-layout">
+            <div class="discipline-copy">
+              <span class="eyebrow">// O CORAÇÃO DO COGNITICUS</span>
+              <h3>Formar engenheiros do conhecimento.</h3>
+              <p>A proposta vai além de formar apenas desenvolvedores, analistas ou cientistas de dados. Ela combina rigor formal, modelagem, construção técnica e comunicação para produzir uma capacidade mais rara: arquitetar conhecimento.</p>
+              <p class="discipline-thesis">O resultado esperado é alguém capaz de investigar um domínio, representar seus conceitos, construir instrumentos, testar hipóteses e comunicar aquilo que descobriu.</p>
+            </div>
+            <div class="knowledge-ladder" aria-label="Componentes da Engenharia do Conhecimento Integrado">
+              <div class="knowledge-rung" style="--rung-width:52%">Matemática</div>
+              <div class="knowledge-rung" style="--rung-width:57%">Lógica</div>
+              <div class="knowledge-rung" style="--rung-width:62%">Computação</div>
+              <div class="knowledge-rung" style="--rung-width:67%">Modelagem</div>
+              <div class="knowledge-rung" style="--rung-width:72%">Engenharia de Software</div>
+              <div class="knowledge-rung" style="--rung-width:77%">Ciência de Dados</div>
+              <div class="knowledge-rung" style="--rung-width:82%">Representação do Conhecimento</div>
+              <div class="knowledge-rung" style="--rung-width:87%">Arquitetura da Informação</div>
+              <div class="knowledge-rung" style="--rung-width:92%">Epistemologia</div>
+              <div class="knowledge-rung" style="--rung-width:97%">Comunicação Científica</div>
+              <div class="knowledge-rung" style="--rung-width:100%">ENGENHEIRO DO CONHECIMENTO</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="fontes">
+        <div class="section-head">
+          <div><span class="section-index">08 / FONTES</span><h2>Arquivos do projeto</h2></div>
+          <p class="section-intro">A página é uma visualização. Estes arquivos continuam sendo as fontes locais de detalhe e podem ser abertos ou baixados diretamente.</p>
+        </div>
+        <div class="source-grid">
+          <a class="source panel" href="mapa1.txt"><small>Mapa mental</small><strong>mapa1.txt</strong><span>Precisão, SMT, estabilidade, ordem e formação.</span></a>
+          <a class="source panel" href="mapa2.txt"><small>Mapa mental</small><strong>mapa2.txt</strong><span>Arquétipos, projetos, conquistas e renda.</span></a>
+          <a class="source panel" href="mapa3.txt"><small>Mapa mental</small><strong>mapa3.txt</strong><span>Projetos hard/soft e preparação pessoal.</span></a>
+          <a class="source panel" href="mimimi_map.json"><small>Mapa 3X</small><strong>mimimi_map.json</strong><span>Rotina, 1kUSDT, SMT, Precisium, estabilidade, OrdemPes e basicForm.</span></a>
+          <a class="source panel" href="Biblioteca_do_Cogniticus.txt"><small>Biblioteca</small><strong>Biblioteca do Cogniticus</strong><span>Materiais e livros recomendados.</span></a>
+          <a class="source panel" href="Biblioteca_Cogniticus_Organizada.txt"><small>Mapa mestre</small><strong>Biblioteca Cogniticus Organizada</strong><span>Tronco, expansão e princípio de transformação.</span></a>
+          <a class="source panel" href="Biblioteca_do_Cogniticus_FreeEduca_Organizada.txt"><small>Curadoria inicial</small><strong>Cogniticus FreeEduca</strong><span>Recorte de 100 itens, faculdades cognitivas e ordem sugerida.</span></a>
+          <a class="source panel" href="Biblioteca_Cogniticus_FreeEduca_Com_Links.md"><small>Catálogo completo</small><strong>FreeEduca com links</strong><span>401 obras em 12 áreas com caminhos externos catalogados.</span></a>
+          <a class="source panel" href="lifesPlan.odt"><small>Documento ODT</small><strong>lifesPlan.odt</strong><span>Plano e descrições de competências.</span></a>
+          <a class="source panel" href="tableEst.ods"><small>Planilha ODS</small><strong>tableEst.ods</strong><span>Matriz de conhecimentos, habilidades e impactos.</span></a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="page footer-row"><div><strong>LifesPlan</strong><br><span>Conhecimento integrado gera capacidade.</span></div><div>Central local · HTML, CSS e JavaScript puros</div></div>
+  </footer>
+
+  <script src="assets/js/freeeduca-catalog.js"></script>
+  <script src="assets/js/freeeduca-library.js"></script>
+  <script>
+    const books = [
+      { title: 'Fundamentos de Matemática Elementar', author: 'Gelson Iezzi e colaboradores', category: 'matematica', area: 'I · Fundação Matemática', essential: true, note: 'Coleção-base para reconstruir álgebra, funções, geometria, combinatória e matemática financeira.' },
+      { title: 'Precalculus', author: 'James Stewart, Lothar Redlin & Saleem Watson', category: 'matematica', area: 'I · Fundação Matemática', note: 'Ponte sólida entre a matemática escolar e o cálculo universitário.' },
+      { title: 'Introduction to Linear Algebra', author: 'Gilbert Strang', category: 'matematica', area: 'I · Fundação Matemática', essential: true, note: 'Vetores, matrizes e transformações — linguagem central de dados, gráficos e engenharia.' },
+      { title: 'Calculus', author: 'James Stewart', category: 'matematica', area: 'I · Fundação Matemática', note: 'Entrada progressiva e extensa no cálculo diferencial e integral.' },
+      { title: 'Calculus', author: 'Michael Spivak', category: 'matematica', area: 'I · Fundação Matemática', note: 'Tratamento mais profundo, rigoroso e orientado a demonstrações.' },
+      { title: 'Discrete Mathematics and Its Applications', author: 'Kenneth H. Rosen', category: 'matematica', area: 'I · Fundação Matemática', essential: true, note: 'A base matemática direta da computação: lógica, conjuntos, grafos e combinatória.' },
+
+      { title: 'How to Prove It', author: 'Daniel J. Velleman', category: 'logica', area: 'II · Lógica', essential: true, note: 'Aprende-se a ler, construir e escrever demonstrações matemáticas.' },
+      { title: 'Introduction to Logic', author: 'Irving M. Copi, Carl Cohen & Kenneth McMahon', category: 'logica', area: 'II · Lógica', note: 'Fundamentos de argumentos, inferência, lógica simbólica e raciocínio crítico.' },
+      { title: 'The Art of Reasoning', author: 'David Kelley', category: 'logica', area: 'II · Lógica', note: 'Raciocínio claro aplicado a argumentos reais, linguagem e avaliação de evidências.' },
+
+      { title: 'Code', author: 'Charles Petzold', category: 'computacao', area: 'III · Ciência da Computação', essential: true, note: 'Uma obra-prima sobre como códigos, circuitos e abstrações fazem nascer um computador.' },
+      { title: "Computer Systems: A Programmer's Perspective", author: "Randal E. Bryant & David R. O'Hallaron", category: 'computacao', area: 'III · Ciência da Computação', note: 'Conecta programas ao hardware, memória, processos, compilação e desempenho.' },
+      { title: 'Algorithms', author: 'Robert Sedgewick & Kevin Wayne', category: 'computacao', area: 'III · Ciência da Computação', essential: true, note: 'Estruturas de dados e algoritmos apresentados com forte orientação prática.' },
+      { title: 'Introduction to Algorithms', author: 'Cormen, Leiserson, Rivest & Stein', category: 'computacao', area: 'III · Ciência da Computação', essential: true, note: 'Referência abrangente para projeto e análise rigorosa de algoritmos.' },
+      { title: 'Operating System Concepts', author: 'Silberschatz, Galvin & Gagne', category: 'computacao', area: 'III · Ciência da Computação', note: 'Processos, memória, armazenamento, concorrência e fundamentos de sistemas operacionais.' },
+      { title: 'Computer Networking: A Top-Down Approach', author: 'James Kurose & Keith Ross', category: 'computacao', area: 'III · Ciência da Computação', note: 'Redes estudadas das aplicações até as camadas e mecanismos de infraestrutura.' },
+
+      { title: 'Clean Architecture', author: 'Robert C. Martin', category: 'software', area: 'IV · Engenharia de Software', essential: true, note: 'Princípios para separar responsabilidades e preservar a capacidade de evolução.' },
+      { title: 'Design Patterns', author: 'Gamma, Helm, Johnson & Vlissides', category: 'software', area: 'IV · Engenharia de Software', note: 'Vocabulário clássico de soluções reutilizáveis para design orientado a objetos.' },
+      { title: 'Refactoring', author: 'Martin Fowler', category: 'software', area: 'IV · Engenharia de Software', note: 'Técnicas disciplinadas para melhorar código existente sem alterar seu comportamento.' },
+      { title: 'Domain-Driven Design', author: 'Eric Evans', category: 'software', area: 'IV · Engenharia de Software', note: 'Modelagem de software guiada pela linguagem e pela complexidade do domínio.' },
+      { title: 'Implementing Domain-Driven Design', author: 'Vaughn Vernon', category: 'software', area: 'IV · Engenharia de Software', note: 'Aplicação prática de contextos delimitados, agregados, eventos e arquitetura.' },
+
+      { title: 'Python for Data Analysis', author: 'Wes McKinney', category: 'dados', area: 'V · Ciência de Dados', essential: true, note: 'Referência prática para manipulação, limpeza e análise de dados com pandas.' },
+      { title: 'Practical Statistics for Data Scientists', author: 'Peter Bruce, Andrew Bruce & Peter Gedeck', category: 'dados', area: 'V · Ciência de Dados', note: 'Estatística aplicada ao trabalho cotidiano com dados e modelos.' },
+      { title: 'The Data Warehouse Toolkit', author: 'Ralph Kimball & Margy Ross', category: 'dados', area: 'V · Ciência de Dados', note: 'Modelagem dimensional para organizar dados analíticos de forma útil e sustentável.' },
+      { title: 'Storytelling with Data', author: 'Cole Nussbaumer Knaflic', category: 'dados comunicacao', area: 'V · Dados / IX · Comunicação', essential: true, note: 'Transforma análises em narrativas visuais claras, precisas e orientadas à decisão.' },
+
+      { title: 'Database System Concepts', author: 'Silberschatz, Korth & Sudarshan', category: 'sistemas', area: 'VI · Banco de Dados', essential: true, note: 'Fundamentos completos de bancos relacionais, transações, índices e arquitetura.' },
+      { title: 'Database Design for Mere Mortals', author: 'Michael J. Hernandez', category: 'sistemas', area: 'VI · Banco de Dados', note: 'Método acessível e cuidadoso para projetar bancos relacionais consistentes.' },
+      { title: 'Applying UML and Patterns', author: 'Craig Larman', category: 'sistemas', area: 'VII · ADS', essential: true, note: 'Análise, design orientado a objetos, UML e padrões trabalhando juntos.' },
+      { title: 'Software Requirements', author: 'Karl Wiegers & Joy Beatty', category: 'sistemas', area: 'VII · ADS', note: 'Engenharia de requisitos do levantamento à validação e ao gerenciamento.' },
+      { title: 'Writing Effective Use Cases', author: 'Alistair Cockburn', category: 'sistemas', area: 'VII · ADS', note: 'Como descrever interações e objetivos de usuários sem afogar o projeto em burocracia.' },
+
+      { title: 'The Craft of Research', author: 'Booth, Colomb, Williams, Bizup & FitzGerald', category: 'conhecimento', area: 'VIII · Produção do Conhecimento', essential: true, note: 'Da pergunta de pesquisa ao argumento, evidência, escrita e revisão.' },
+      { title: 'The Elements of Style', author: 'William Strunk Jr. & E. B. White', category: 'conhecimento', area: 'VIII · Produção do Conhecimento', note: 'Um clássico compacto sobre clareza, concisão e disciplina na escrita.' },
+      { title: 'The Logic of Scientific Discovery', author: 'Karl Popper', category: 'conhecimento', area: 'VIII · Produção do Conhecimento', note: 'Problemas, testes, falseabilidade e a lógica crítica da investigação científica.' },
+      { title: 'The Structure of Scientific Revolutions', author: 'Thomas S. Kuhn', category: 'conhecimento', area: 'VIII · Produção do Conhecimento', note: 'Paradigmas, ciência normal e mudanças profundas na organização do conhecimento.' },
+
+      { title: 'Made to Stick', author: 'Chip Heath & Dan Heath', category: 'comunicacao', area: 'IX · Comunicação', essential: true, note: 'Por que algumas ideias são compreendidas, lembradas e transmitidas.' },
+      { title: 'Presentation Zen', author: 'Garr Reynolds', category: 'comunicacao', area: 'IX · Comunicação', note: 'Apresentações mais simples, visuais e centradas na mensagem.' },
+
+      { title: 'Artificial Intelligence: A Modern Approach', author: 'Stuart Russell & Peter Norvig', category: 'conhecimento', area: 'XI · Engenharia do Conhecimento', essential: true, note: 'Panorama fundamental de agentes, busca, raciocínio, aprendizagem e IA.', url: 'https://aima.cs.berkeley.edu/' },
+      { title: 'Knowledge Representation and Reasoning', author: 'Ronald Brachman & Hector Levesque', category: 'conhecimento', area: 'XI · Engenharia do Conhecimento', note: 'Fundamentos formais para representar fatos, conceitos e inferências.', url: 'https://shop.elsevier.com/books/knowledge-representation-and-reasoning/brachman/978-1-55860-932-7' },
+      { title: 'The Knowledge-Creating Company', author: 'Ikujiro Nonaka & Hirotaka Takeuchi', category: 'conhecimento', area: 'XI · Engenharia do Conhecimento', note: 'Como organizações criam, convertem e incorporam conhecimento.' },
+      { title: 'Conceptual Modeling: Foundations and Applications', author: 'Borgida, Chaudhri, Giorgini & Yu (eds.)', category: 'conhecimento', area: 'XI · Engenharia do Conhecimento', note: 'Modelos conceituais, ontologias e integração de informação em sistemas.', url: 'https://link.springer.com/book/10.1007/978-3-642-02463-4' },
+      { title: 'Information Architecture for the Web and Beyond', author: 'Rosenfeld, Morville & Arango', category: 'conhecimento', area: 'XI · Engenharia do Conhecimento', note: 'Organização, rotulagem, navegação e busca em ambientes informacionais complexos.' },
+
+      { title: 'Organon', author: 'Aristóteles', category: 'filosofia', area: 'XII · Filosofia', essential: true, note: 'Conjunto fundador para categorias, interpretação, argumentação e demonstração.' },
+      { title: 'Posterior Analytics', author: 'Aristóteles', category: 'filosofia', area: 'XII · Filosofia', note: 'Investigação clássica sobre demonstração, ciência e conhecimento das causas.' },
+      { title: 'Discourse on Method', author: 'René Descartes', category: 'filosofia', area: 'XII · Filosofia', note: 'Método, ordem do pensamento e busca disciplinada por fundamentos.' },
+      { title: 'Critique of Pure Reason', author: 'Immanuel Kant', category: 'filosofia', area: 'XII · Filosofia', note: 'Obra avançada sobre condições, limites e estrutura do conhecimento humano.' },
+
+      { title: 'Make It Stick', author: 'Brown, Roediger & McDaniel', category: 'aprendizagem', area: 'XIII · Engenharia da Aprendizagem', essential: true, note: 'Princípios de aprendizagem durável baseados em pesquisa cognitiva.' },
+      { title: 'How Learning Works', author: 'Susan Ambrose e colaboradores', category: 'aprendizagem', area: 'XIII · Engenharia da Aprendizagem', note: 'Sete princípios que conectam ciência da aprendizagem e prática de ensino.' },
+      { title: 'Ultralearning', author: 'Scott H. Young', category: 'aprendizagem', area: 'XIII · Engenharia da Aprendizagem', note: 'Estratégias intensivas e autodirigidas para adquirir habilidades difíceis.' }
+    ];
+
+    const bookColors = {
+      matematica: '#6ef5ff', logica: '#c58cff', computacao: '#a8ff60', software: '#ffd166',
+      dados: '#63d8ff', sistemas: '#ff9f68', conhecimento: '#ff7aa8', comunicacao: '#f5d66e',
+      filosofia: '#d0a7ff', aprendizagem: '#72ffc1'
+    };
+
+    const bookGrid = document.querySelector('#book-grid');
+    const bookSearch = document.querySelector('#book-search');
+    const bookFilters = [...document.querySelectorAll('.book-filter')];
+    const bookEmpty = document.querySelector('#book-empty');
+    let currentBookFilter = 'all';
+
+    function bookSearchUrl(book) {
+      return book.url || `https://openlibrary.org/search?q=${encodeURIComponent(`${book.title} ${book.author}`)}`;
+    }
+
+    function renderBooks() {
+      const query = normalize(bookSearch.value.trim());
+      const visibleBooks = books.filter(book => {
+        const categories = book.category.split(' ');
+        const categoryMatch = currentBookFilter === 'all'
+          || (currentBookFilter === 'essential' && book.essential)
+          || categories.includes(currentBookFilter);
+        const searchMatch = normalize(`${book.title} ${book.author} ${book.area} ${book.note}`).includes(query);
+        return categoryMatch && searchMatch;
+      });
+
+      bookGrid.innerHTML = visibleBooks.map((book, index) => {
+        const mainCategory = book.category.split(' ')[0];
+        const priority = book.essential ? '<span class="book-priority" aria-label="Prioridade cinco estrelas">★★★★★</span>' : '<span class="book-priority" aria-label="Livro recomendado">◆</span>';
+        return `<article class="book-card panel" style="--book-color:${bookColors[mainCategory]}" data-book-index="${index}">
+          <div class="book-top"><span class="book-area">${book.area}</span>${priority}</div>
+          <h4>${book.title}</h4>
+          <p class="book-author">${book.author}</p>
+          <p class="book-note">${book.note}</p>
+          <a class="book-link" href="${bookSearchUrl(book)}" target="_blank" rel="noopener noreferrer">Localizar edição ↗</a>
+        </article>`;
+      }).join('');
+      bookEmpty.style.display = visibleBooks.length ? 'none' : 'block';
+    }
+
+    bookFilters.forEach(filter => filter.addEventListener('click', () => {
+      currentBookFilter = filter.dataset.bookFilter;
+      bookFilters.forEach(item => item.classList.toggle('active', item === filter));
+      renderBooks();
+    }));
+    bookSearch.addEventListener('input', renderBooks);
+    renderBooks();
+
+    const incomeDefaults = {
+      target: 1000,
+      sources: [
+        { name: 'freelan', value: 250 },
+        { name: 'analTech/SmTB', value: 120 },
+        { name: 'SmM', value: 120 },
+        { name: 'trading', value: 200 }
+      ]
+    };
+    const incomeStorageKey = 'lifesplan:mimimi-income-v1';
+    const incomeBars = document.querySelector('#income-bars');
+    const incomeTotal = document.querySelector('#income-total');
+    const incomeTarget = document.querySelector('#income-target');
+    const incomeTargetMetric = document.querySelector('#income-target-metric');
+    const incomeProgressNote = document.querySelector('#income-progress-note');
+    const incomeContext = document.querySelector('#income-context');
+    const incomeGap = document.querySelector('#income-gap');
+    const incomeAdd = document.querySelector('#income-add');
+    const incomeReset = document.querySelector('#income-reset');
+
+    function createIncomeId() {
+      return `income-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+    }
+
+    function cloneIncomeDefaults() {
+      return {
+        target: incomeDefaults.target,
+        sources: incomeDefaults.sources.map(source => ({ ...source, id: createIncomeId() }))
+      };
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;');
+    }
+
+    function readIncomeState() {
+      try {
+        const stored = JSON.parse(localStorage.getItem(incomeStorageKey));
+        if (!stored || !Array.isArray(stored.sources)) throw new Error('invalid income state');
+        return {
+          target: Number(stored.target) > 0 ? Number(stored.target) : incomeDefaults.target,
+          sources: stored.sources.map(source => ({
+            id: source.id || createIncomeId(),
+            name: String(source.name || 'nova fonte'),
+            value: Number(source.value) || 0
+          }))
+        };
+      } catch {
+        return cloneIncomeDefaults();
+      }
+    }
+
+    let incomeState = readIncomeState();
+
+    function persistIncomeState() {
+      try {
+        localStorage.setItem(incomeStorageKey, JSON.stringify(incomeState));
+      } catch {
+        // A simulação continua funcionando mesmo se o navegador bloquear persistência local.
+      }
+    }
+
+    function money(value) {
+      return Math.round(Number(value) || 0).toLocaleString('pt-BR');
+    }
+
+    function targetLabel(value) {
+      return Number(value) === 1000 ? '1k USDT' : `${money(value)} USDT`;
+    }
+
+    function renderIncomeRows() {
+      incomeTarget.value = incomeState.target;
+      incomeBars.innerHTML = incomeState.sources.map(source => `
+        <div class="income-row" data-income-id="${source.id}">
+          <input class="income-input income-name" type="text" value="${escapeHtml(source.name)}" aria-label="Nome da fonte de renda">
+          <div class="income-track" aria-hidden="true"><span class="income-fill"></span></div>
+          <input class="income-input income-value" type="number" min="0" step="10" inputmode="decimal" value="${Number(source.value) || 0}" aria-label="Valor da fonte em USDT">
+          <button class="income-remove" type="button" aria-label="Remover fonte de renda">×</button>
+        </div>
+      `).join('');
+      updateIncomeDashboard(false);
+    }
+
+    function syncIncomeFromDom() {
+      incomeState.target = Math.max(1, Number(incomeTarget.value) || incomeDefaults.target);
+      incomeState.sources = [...incomeBars.querySelectorAll('.income-row')].map(row => ({
+        id: row.dataset.incomeId || createIncomeId(),
+        name: row.querySelector('.income-name').value.trim() || 'fonte sem nome',
+        value: Math.max(0, Number(row.querySelector('.income-value').value) || 0)
+      }));
+    }
+
+    function updateIncomeDashboard(shouldPersist = true) {
+      const total = incomeState.sources.reduce((sum, source) => sum + (Number(source.value) || 0), 0);
+      const target = Math.max(1, Number(incomeState.target) || incomeDefaults.target);
+      const progress = Math.min(999, Math.round((total / target) * 100));
+      const gap = target - total;
+
+      incomeTotal.textContent = `${money(total)} / ${money(target)}`;
+      incomeTargetMetric.textContent = targetLabel(target);
+      incomeProgressNote.textContent = `${progress}% da meta mapeada em ${incomeState.sources.length} fonte${incomeState.sources.length === 1 ? '' : 's'} de renda.`;
+      incomeContext.textContent = `Edite nomes e valores para simular fontes de renda. Total atual: ${money(total)} USDT de ${money(target)} USDT.`;
+
+      incomeState.sources.forEach(source => {
+        const row = incomeBars.querySelector(`[data-income-id="${source.id}"]`);
+        const fill = row?.querySelector('.income-fill');
+        if (fill) fill.style.setProperty('--income-width', `${Math.min(100, ((Number(source.value) || 0) / target) * 100)}%`);
+      });
+
+      incomeGap.classList.toggle('good', gap <= 0);
+      incomeGap.classList.toggle('warning', gap > 0 && progress >= 70);
+      incomeGap.textContent = gap > 0
+        ? `Lacuna estratégica: ${money(gap)} USDT. Sugestão: ampliar pacote recorrente, assinatura de análise, utilitário interno ou micro-SaaS.`
+        : `Meta batida com excedente de ${money(Math.abs(gap))} USDT. Próximo jogo: proteger reserva, reinvestir e buscar previsibilidade.`;
+
+      if (shouldPersist) persistIncomeState();
+    }
+
+    incomeBars.addEventListener('input', () => {
+      syncIncomeFromDom();
+      updateIncomeDashboard();
+    });
+
+    incomeBars.addEventListener('click', event => {
+      const removeButton = event.target.closest('.income-remove');
+      if (!removeButton) return;
+      const row = removeButton.closest('.income-row');
+      incomeState.sources = incomeState.sources.filter(source => source.id !== row.dataset.incomeId);
+      renderIncomeRows();
+      persistIncomeState();
+    });
+
+    incomeTarget.addEventListener('input', () => {
+      syncIncomeFromDom();
+      updateIncomeDashboard();
+    });
+
+    incomeAdd.addEventListener('click', () => {
+      syncIncomeFromDom();
+      incomeState.sources.push({ id: createIncomeId(), name: 'nova fonte', value: 0 });
+      renderIncomeRows();
+      persistIncomeState();
+      incomeBars.querySelector('.income-row:last-child .income-name')?.focus();
+    });
+
+    incomeReset.addEventListener('click', () => {
+      incomeState = cloneIncomeDefaults();
+      renderIncomeRows();
+      persistIncomeState();
+    });
+
+    renderIncomeRows();
+
+    const menuButton = document.querySelector('.menu-button');
+    const navLinks = document.querySelector('.nav-links');
+
+    menuButton.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      menuButton.setAttribute('aria-expanded', String(isOpen));
+      menuButton.textContent = isOpen ? '×' : '☰';
+    });
+
+    navLinks.addEventListener('click', event => {
+      if (event.target.matches('a')) {
+        navLinks.classList.remove('open');
+        menuButton.setAttribute('aria-expanded', 'false');
+        menuButton.textContent = '☰';
+      }
+    });
+
+    const searchInput = document.querySelector('#resource-search');
+    const filters = [...document.querySelectorAll('[data-filter]')];
+    const resources = [...document.querySelectorAll('.resource')];
+    const emptyState = document.querySelector('#empty-state');
+    const resourceCount = document.querySelector('#resource-count');
+    let currentFilter = 'all';
+
+    function normalize(value) {
+      return value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+    }
+
+    function updateResources() {
+      const query = normalize(searchInput.value.trim());
+      let visible = 0;
+      resources.forEach(resource => {
+        const categoryMatch = currentFilter === 'all' || resource.dataset.category === currentFilter;
+        const searchMatch = normalize(resource.dataset.search + ' ' + resource.textContent).includes(query);
+        resource.hidden = !(categoryMatch && searchMatch);
+        if (!resource.hidden) visible += 1;
+      });
+      emptyState.style.display = visible ? 'none' : 'block';
+      resourceCount.textContent = String(visible).padStart(2, '0');
+    }
+
+    filters.forEach(filter => filter.addEventListener('click', () => {
+      currentFilter = filter.dataset.filter;
+      filters.forEach(item => item.classList.toggle('active', item === filter));
+      updateResources();
+    }));
+    searchInput.addEventListener('input', updateResources);
+
+    const mapTabs = [...document.querySelectorAll('.map-tab')];
+    const mapViews = [...document.querySelectorAll('.map-view')];
+    mapTabs.forEach(tab => tab.addEventListener('click', () => {
+      mapTabs.forEach(item => {
+        const selected = item === tab;
+        item.classList.toggle('active', selected);
+        item.setAttribute('aria-selected', String(selected));
+      });
+      mapViews.forEach(view => {
+        const selected = view.id === tab.dataset.map;
+        view.classList.toggle('active', selected);
+        view.hidden = !selected;
+      });
+    }));
+  </script>
+</body>
+</html>

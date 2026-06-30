@@ -1,0 +1,119 @@
+Biblioteca do Cogniticus — Materiais recomendados
+
+Matemática
+
+-   Gilbert Strang (MIT OpenCourseWare): https://ocw.mit.edu/
+-   3Blue1Brown: https://www.youtube.com/@3blue1brown
+
+Computação
+
+-   Harvard CS50: https://cs50.harvard.edu/
+-   MIT OpenCourseWare: https://ocw.mit.edu/
+-   Stanford Online: https://online.stanford.edu/
+
+Ciência de Dados
+
+-   Kaggle: https://www.kaggle.com/
+
+Produtividade Digital
+
+-   Microsoft Learn: https://learn.microsoft.com/
+-   Microsoft 365 Developer / Graph: https://learn.microsoft.com/graph/
+-   Google Workspace Developers: https://developers.google.com/workspace
+-   LibreOffice: https://www.libreoffice.org/
+-   LibreOffice Documentation: https://documentation.libreoffice.org/
+-   LibreOffice SDK / UNO API: https://api.libreoffice.org/
+    https://wiki.documentfoundation.org/Documentation/SDKGuide
+-   OpenDocument Format (ODF):
+    https://docs.oasis-open.org/office/OpenDocument/
+-   ONLYOFFICE Developers: https://api.onlyoffice.com/
+-   Proton: https://proton.me/
+-   Proton Drive: https://proton.me/drive
+-   Proton Docs: https://proton.me/docs
+-   Notion API: https://developers.notion.com/
+-   Obsidian: https://obsidian.md/
+-   Obsidian Developer Docs: https://docs.obsidian.md/
+
+Livros recomendados
+
+Matemática
+
+-   Fundamentos de Matemática Elementar — Gelson Iezzi
+-   Precalculus — James Stewart
+-   Introduction to Linear Algebra — Gilbert Strang
+-   Calculus — James Stewart
+-   Calculus — Michael Spivak
+-   Discrete Mathematics and Its Applications — Kenneth Rosen
+
+Lógica
+
+-   How to Prove It — Daniel J. Velleman
+-   Introduction to Logic — Irving Copi
+-   The Art of Reasoning — David Kelley
+
+Computação
+
+-   Code — Charles Petzold
+-   Computer Systems: A Programmer’s Perspective
+-   Algorithms — Sedgewick & Wayne
+-   Introduction to Algorithms (CLRS)
+-   Operating System Concepts
+-   Computer Networking: A Top-Down Approach
+
+Engenharia de Software
+
+-   Clean Architecture
+-   Design Patterns (GoF)
+-   Refactoring
+-   Domain-Driven Design
+-   Implementing Domain-Driven Design
+
+Ciência de Dados
+
+-   Python for Data Analysis
+-   Practical Statistics for Data Scientists
+-   The Data Warehouse Toolkit
+-   Storytelling with Data
+
+Banco de Dados
+
+-   Database System Concepts
+-   Database Design for Mere Mortals
+
+ADS
+
+-   Applying UML and Patterns
+-   Software Requirements
+-   Writing Effective Use Cases
+
+Produção do Conhecimento
+
+-   The Craft of Research
+-   The Elements of Style
+-   The Logic of Scientific Discovery
+-   The Structure of Scientific Revolutions
+
+Comunicação
+
+-   Made to Stick
+-   Presentation Zen
+
+Engenharia do Conhecimento
+
+-   Artificial Intelligence: A Modern Approach
+-   Knowledge Representation and Reasoning
+-   The Knowledge-Creating Company
+-   Conceptual Modeling
+
+Filosofia
+
+-   Organon
+-   Posterior Analytics
+-   Discourse on Method
+-   Critique of Pure Reason
+
+Aprendizagem
+
+-   Make It Stick
+-   How Learning Works
+-   Ultralearning

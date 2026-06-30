@@ -1,0 +1,283 @@
+{
+  "id": "mimimi",
+  "title": "mimimi",
+  "description": "Mapa mínimo 3X para sustentar alinhamento com objetivos, propósito e sonho.",
+  "principle": "Representa três vezes o mínimo operacional, pessoal, intelectual e financeiro que precisa ser sustentado para manter a vida e os projetos alinhados.",
+  "mainBranches": [
+    {
+      "id": "rotina",
+      "title": "rotina",
+      "type": "operational_routine",
+      "notes": "Elementos que devem entrar na rotina de manutenção diária/semanal.",
+      "items": [
+        "incluir na rotina",
+        "corpEsp",
+        "estEst",
+        "dev dedicaded",
+        "moto-boy order"
+      ]
+    },
+    {
+      "id": "income_goal_1kusdt",
+      "title": "1kUSDT",
+      "type": "income_goal",
+      "notes": "Meta de renda distribuída por fontes/produtos.",
+      "target": {
+        "amount": 1000,
+        "currency": "USDT"
+      },
+      "sources": [
+        {
+          "id": "smtb_income",
+          "title": "SmTB",
+          "target": 100
+        },
+        {
+          "id": "analtech_income",
+          "title": "analTech",
+          "target": 120
+        },
+        {
+          "id": "freelan_income",
+          "title": "freelan",
+          "target": 250
+        },
+        {
+          "id": "smm_income",
+          "title": "SmM",
+          "target": 120
+        }
+      ]
+    },
+    {
+      "id": "smt",
+      "title": "SMT (Smart Trade Boot)",
+      "type": "primary_project",
+      "notes": "Projeto primário do mapa.",
+      "qualities": [
+        "laboratorial",
+        "capaz de auxiliar em pesquisas e investigações de novas técnicas, indicadores e estratégias de trading",
+        "capaz de fornecer suporte/auxílio real a operações de trading"
+      ],
+      "goals": [
+        "UTILIDADE OPERACIONAL",
+        "REDUNDÂNCIA FINANCEIRA",
+        "AUXÍLIO REAL A OPERAÇÕES LUCRATIVAS",
+        "OPERAÇÕES AUTOMÁTICAS LUCRATIVAS",
+        "Arquitetura completa",
+        "Monetização"
+      ]
+    },
+    {
+      "id": "precisium",
+      "title": "Precisium",
+      "type": "secondary_project",
+      "notes": "Projeto secundário ligado a precisão, performance, operação offline segura e atualização de alvos.",
+      "items": [
+        "precision",
+        "performático",
+        "off seguro",
+        "mecanismo de atualização de alvos"
+      ]
+    },
+    {
+      "id": "estabilidade",
+      "title": "estabilidade",
+      "type": "stabilization_plan",
+      "notes": "Plano mais importante de estabilização: criar e manter um negócio lucrativo, previsível e operacionalmente gerenciável.",
+      "objectives": [
+        "estabilidade",
+        "previsibilidade",
+        "fonte de renda",
+        "receita",
+        "negócio"
+      ],
+      "branches": [
+        {
+          "id": "servicos",
+          "title": "serviços",
+          "items": [
+            "web dev qualificações",
+            "automações",
+            "webScraping",
+            "RPA",
+            "aplicações native",
+            "aplicações web",
+            "aplicações híbridas",
+            "ERP",
+            "MOM",
+            "utils",
+            "RestAPI"
+          ]
+        },
+        {
+          "id": "atendimento_marketing",
+          "title": "atendimento & marketing",
+          "items": [
+            "método de prospecção",
+            "market funnel",
+            "avaliação de progresso operacional",
+            "VSP contato com cliente"
+          ]
+        },
+        {
+          "id": "gerenciamento_operacional",
+          "title": "gerenciamento operacional",
+          "items": [
+            "operadores",
+            "algoritmo operacional",
+            "organização de serviços",
+            "definição de prioridades e prazos"
+          ]
+        },
+        {
+          "id": "adm_financeiro",
+          "title": "adm financeiro",
+          "items": [
+            "fluxo de caixa",
+            "gestão de receita",
+            "controle de custos"
+          ]
+        },
+        {
+          "id": "produtos",
+          "title": "produtos",
+          "items": [
+            "produtos",
+            "nicho",
+            "infoProduto"
+          ]
+        },
+        {
+          "id": "analtech",
+          "title": "AnalTech",
+          "items": [
+            "assinatura de relatórios de análise técnica",
+            "segundo TradingView",
+            "atendimento & marketing",
+            "tk",
+            "yt tráfego",
+            "plataforma web canal",
+            "redes",
+            "whats",
+            "insta",
+            "gerenciamento de produção",
+            "infraestrutura de produção",
+            "admFinanc"
+          ]
+        },
+        {
+          "id": "trading",
+          "title": "Trading",
+          "items": [
+            "Subtópico passivo"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ordempes",
+      "title": "OrdemPes",
+      "type": "personal_order",
+      "notes": "Problemas pessoais e ordem material: estilo, casa, moto, recursos, suprimentos e estrutura doméstica.",
+      "branches": [
+        {
+          "id": "preparo_motoboy_surv",
+          "title": "prepars motoboy surv",
+          "items": [
+            "bolsa capaz",
+            "suprimentos",
+            "equipamentos",
+            "chave inglesa",
+            "alicate",
+            "fenda + philips",
+            "smartphone",
+            "powerbank + cabo",
+            "capaDeChuva",
+            "recursos",
+            "kit reparo pneus",
+            "kit MinMed",
+            "bomba de ar",
+            "óleo reserva",
+            "cabo extra"
+          ]
+        },
+        {
+          "id": "ordem_my_home",
+          "title": "ordem my home",
+          "items": [
+            "fluxo de caixa escritório",
+            "WorkSpace",
+            "Oficina",
+            "Laboratório",
+            "cozinha",
+            "água",
+            "caloria",
+            "abrigo sala pessoal",
+            "A estufa",
+            "Banheiro",
+            "Sistema hídrico",
+            "ordem no armário",
+            "Style"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "basicform",
+      "title": "basicForm",
+      "type": "basic_formation_plan",
+      "notes": "Plano de formação básica adequado ao porte e às ambições do usuário.",
+      "coreMethod": "análise, investigação, pesquisa, estudo e projeção",
+      "branches": [
+        {
+          "id": "ciencias_gerais",
+          "title": "ciências gerais",
+          "items": [
+            "nutrição",
+            "educação física"
+          ]
+        },
+        {
+          "id": "arsliber",
+          "title": "arsliber",
+          "items": [
+            "esaApos",
+            "outersArtgs",
+            "sacroest",
+            "4sapiens",
+            "4evans"
+          ]
+        },
+        {
+          "id": "profissional_especializacao",
+          "title": "proft especialize",
+          "items": [
+            "devSuper",
+            "outersArtgs",
+            "TI + SC"
+          ]
+        },
+        {
+          "id": "filosofia_olaviana",
+          "title": "filosofia olaviana",
+          "items": [
+            "leitor inteligente",
+            "princípios e métodos",
+            "história Essencial"
+          ]
+        },
+        {
+          "id": "minpnsi",
+          "title": "MinPNSI",
+          "items": []
+        }
+      ]
+    }
+  ],
+  "rawTermsPreserved": [
+    "Subtopic",
+    "Subtopic",
+    "mimimi"
+  ]
+}
